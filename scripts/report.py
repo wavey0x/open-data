@@ -231,9 +231,11 @@ def cvxprisma_lp_apr(block=chain.height):
     return reward_apr
 
 def push_to_gh(data):
-    project_directory = '/Users/wavey/yearn/wavey/wavey0x.github.io'
-    json_file_directory = '/Users/wavey/yearn/wavey/wavey0x.github.io/data'
-    json_filename = 'prisma_liquid_locker_data.json'
+    from dotenv import load_dotenv
+    load_dotenv()
+    project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
+    json_file_directory = project_directory+'/data'
+    json_filename = os.getenv('JSON_FILE')
 
     # Write the JSON object to the file
     json_file_path = os.path.join(json_file_directory, json_filename)
