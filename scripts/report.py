@@ -248,14 +248,14 @@ def push_to_gh(data):
     # Git commands to commit and push the changes
     try:
         # Add the file to staging
-        subprocess.run(['git', 'add', '-A'], check=True)
+        subprocess.run(['git', 'add', f'{json_file_directory}/{json_filename}'], check=True)
 
         # Commit the changes
         commit_message = 'Update prisma_liquid_locker_data.json'
         subprocess.run(['git', 'commit', '-m', commit_message], check=True)
 
         # Push the changes
-        subprocess.run(['git', 'push'], check=True)
+        subprocess.run(['git', 'push', '--force-with-lease', '--force'], check=True)
 
         print("Changes committed and pushed to GitHub successfully.")
 
