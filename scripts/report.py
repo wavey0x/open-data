@@ -19,7 +19,7 @@ data = {
 
 def main():
     data = stats()
-    print(data)
+    # print(data)
     
     push_to_gh(data)
 
@@ -233,9 +233,20 @@ def cvxprisma_lp_apr(block=chain.height):
 def push_to_gh(data):
     from dotenv import load_dotenv
     load_dotenv()
+
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     json_file_directory = project_directory+'/data'
     json_filename = os.getenv('JSON_FILE')
+
+    os.chdir(project_directory)
+    try:
+        # Add the file to staging
+        subprocess.run(['git', 'fetch', '--all'], check=True)
+        subprocess.run(['git', 'reset', '--hard', 'origin/master'], check=True)
+        print("Local project synced")
+
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
 
     # Write the JSON object to the file
     json_file_path = os.path.join(json_file_directory, json_filename)
