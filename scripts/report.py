@@ -23,7 +23,6 @@ data = {
 
 def main():
     data = stats()
-    # print(data)
     
     if os.getenv('ENV') != 'dev':
         push_to_gh(data)
@@ -95,14 +94,15 @@ def stats():
 
 def get_boost(user, week, block=height):
     vault = Contract(constants.VAULT)
+    calculator = Contract(vault.boostCalculator(block_identifier=block))
+
     key = web3.keccak(
         hexstr="00" * 12
         + user[2:]
         + "0000000000000000000000000000000000000000000000000000000000009005"
     )
-    data = int(web3.eth.getStorageAt(vault.address, int(key.hex(), 16) + week // 2).hex(), 16)
-    calculator = Contract(constants.BOOST_CALCULATOR)
-
+    data = int(web3.eth.getStorageAt(vault.address, int(key.hex(), 16) + week // 2, block_identifier=block).hex(), 16)
+    
     if week % 2:
         account_weekly_earned = data >> 128
     else:
@@ -112,8 +112,8 @@ def get_boost(user, week, block=height):
         user,
         2e18,
         account_weekly_earned,
-        vault.weeklyEmissions(week),
-        block_identifier=height
+        vault.weeklyEmissions(week, block_identifier=block),
+        block_identifier=block
     ) / 1e18
 
     return boost
