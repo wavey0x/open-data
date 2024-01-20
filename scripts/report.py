@@ -1,6 +1,10 @@
 
 from brownie import web3, Contract, chain
 import constants, utils, requests, json, os, subprocess
+from dotenv import load_dotenv
+
+load_dotenv()
+height = chain.height
 
 DAY = 24 * 60 * 60
 YEAR = DAY * 365
@@ -21,8 +25,8 @@ def main():
     data = stats()
     # print(data)
     
-    push_to_gh(data)
-
+    if os.getenv('ENV') != 'dev':
+        push_to_gh(data)
 
 def stats():
     START_WEEK = 12
@@ -74,7 +78,7 @@ def stats():
             week_data['week_number'] = target_week
             week_data['peg'] = get_peg(d['pool'], block=end_block)
             week_data['lock_gain'] = end_amt - start_amt
-            week_data['current_boost_multiplier'] = get_boost(liquid_lockers[l], target_week)
+            week_data['current_boost_multiplier'] = get_boost(liquid_lockers[l], target_week, block=end_block)
             week_data['global_weight_ratio'] = w / total_weight
             week_data['global_weight'] = total_weight
             week_data['weight']= w
@@ -89,7 +93,7 @@ def stats():
 
     return data
 
-def get_boost(user, week):
+def get_boost(user, week, block=height):
     vault = Contract(constants.VAULT)
     key = web3.keccak(
         hexstr="00" * 12
@@ -104,7 +108,13 @@ def get_boost(user, week):
     else:
         account_weekly_earned = data % 2**128
 
-    boost = calculator.getBoostedAmount(user,2e18,account_weekly_earned,vault.weeklyEmissions(week)) / 1e18
+    boost = calculator.getBoostedAmount(
+        user,
+        2e18,
+        account_weekly_earned,
+        vault.weeklyEmissions(week),
+        block_identifier=height
+    ) / 1e18
 
     return boost
 
@@ -231,9 +241,6 @@ def cvxprisma_lp_apr(block=chain.height):
     return reward_apr
 
 def push_to_gh(data):
-    from dotenv import load_dotenv
-    load_dotenv()
-
     home_dir = os.getenv('HOME')
     key = os.getenv('KEY')
     os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}'
