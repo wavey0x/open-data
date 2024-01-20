@@ -234,6 +234,9 @@ def push_to_gh(data):
     from dotenv import load_dotenv
     load_dotenv()
 
+    home_dir = os.getenv['HOME']
+    key = os.getenv['KEY']
+    os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}'
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     json_file_directory = project_directory+'/data'
     json_filename = os.getenv('JSON_FILE')
