@@ -1,6 +1,6 @@
 import constants 
 from brownie import ZERO_ADDRESS, Contract, web3, accounts, chain
-import constants
+import constants, requests
 from datetime import datetime
 
 WEEK = 60 * 60 * 24 * 7
@@ -66,3 +66,14 @@ def timestamp_to_date_string(ts):
 def timestamp_to_string(ts):
     dt = datetime.utcfromtimestamp(ts).strftime("%m/%d/%Y, %H:%M:%S")
     return dt
+
+def get_prices(tokens=[]):
+    # Query DefiLlama for all of our coin prices
+    coins = ','.join(f'ethereum:{k}' for k in tokens)
+    url = f'https://coins.llama.fi/prices/current/{coins}?searchWidth=40h'
+    response = requests.get(url).json()['coins']
+    response = {key.replace('ethereum:', ''): value for key, value in response.items()}
+    prices = {}
+    for t in tokens:
+        prices[t] = response[t]['price']
+    return prices

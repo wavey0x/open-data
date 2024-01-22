@@ -2,10 +2,14 @@
 from brownie import web3, Contract, chain
 import constants, utils, requests, json, os, subprocess
 from dotenv import load_dotenv
+import time, datetime
 
 load_dotenv()
-height = chain.height
 
+start_time = time.time()
+height = chain.height
+vault = Contract(constants.VAULT)
+current_week = vault.getWeek()
 DAY = 24 * 60 * 60
 YEAR = DAY * 365
 data = {
@@ -23,13 +27,24 @@ data = {
 
 def main():
     data = stats()
-    
+
+    json_filename = os.getenv('JSON_FILE')
+    project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
+    write_data_as_json(data, project_directory, json_filename)
+
     if os.getenv('ENV') != 'dev':
-        push_to_gh(data)
+        # fetch_from_gh(project_directory)
+        push_to_gh(data, project_directory, json_filename)
+
+    end_time = time.time()  # Get the end time
+    duration = end_time - start_time  # Calculate the duration
+
+    print(f"Total run time: {duration:.2f} seconds")
 
 def stats():
     START_WEEK = 12
     token_locker = Contract(constants.TOKEN_LOCKER)
+    last_run_data = get_last_run_data() # Re-using old data helps us speed up expensive repetitive block queries
     data = {
         'prisma_week': token_locker.getWeek(),
         'updated_at': chain.time(),
@@ -52,7 +67,6 @@ def stats():
     }
 
     token_locker = Contract(constants.TOKEN_LOCKER)
-    current_week = token_locker.getWeek()
     
 
     liquid_lockers = {
@@ -60,30 +74,44 @@ def stats():
         'yPRISMA': constants.YEARN_LOCKER
     }
 
-    
     for l in liquid_lockers:
+        account = liquid_lockers[l]
         d = data['liquid_lockers'][l]
         weekly_data = []
+        boost_fees_cache = {}
+        try:
+            weekly_data_cache = last_run_data['liquid_lockers'][l]['weekly_data']
+            boost_fees_cache = {item['week_number']: item['boost_fees_collected'] for item in weekly_data_cache}
+        except:
+            print(f'Cannot parse past data.')
         for target_week in range(START_WEEK, current_week + 1):
             week_data = {}
             print(f'Week: {target_week}')
             token_locker.getTotalWeightAt(target_week)
             start_block = utils.utils.get_week_start_block(target_week)
             end_block = utils.utils.get_week_end_block(target_week)
-            start_amt = token_locker.getAccountWeightAt(liquid_lockers[l], target_week - 1)/52
-            end_amt = token_locker.getAccountWeightAt(liquid_lockers[l], target_week)/52
-            w = token_locker.getAccountWeightAt(liquid_lockers[l], target_week)
+            start_amt = token_locker.getAccountWeightAt(account, target_week - 1)/52
+            end_amt = token_locker.getAccountWeightAt(account, target_week)/52
+            w = token_locker.getAccountWeightAt(account, target_week)
             total_weight = token_locker.getTotalWeightAt(target_week)
             week_data['week_number'] = target_week
             week_data['peg'] = get_peg(d['pool'], block=end_block)
             week_data['lock_gain'] = end_amt - start_amt
-            week_data['current_boost_multiplier'] = get_boost(liquid_lockers[l], target_week, block=end_block)
+            week_data['current_boost_multiplier'] = get_boost(account, target_week, block=end_block)
             week_data['global_weight_ratio'] = w / total_weight
             week_data['global_weight'] = total_weight
             week_data['weight']= w
-            
+            week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
+            if (
+                target_week == current_week or len(boost_fees_cache) == 0 or not target_week in boost_fees_cache
+            ):
+                week_data['boost_fees_collected'] = get_boost_delegation_fees(account, start_block=start_block, end_block=end_block)
+            else:
+                week_data['boost_fees_collected'] = boost_fees_cache[target_week]
             weekly_data.append(week_data)
         data['liquid_lockers'][l]['weekly_data'] = weekly_data
+        
+        
 
     data['liquid_lockers']['cvxPrisma']['current_staking_apr'] = cvxprisma_staking_apr()
     data['liquid_lockers']['cvxPrisma']['current_lp_apr'] = cvxprisma_lp_apr()
@@ -91,6 +119,18 @@ def stats():
     data['liquid_lockers']['yPRISMA']['current_lp_apr'] = yprisma_lp_apr()
 
     return data
+
+def get_remaining_weekly_boost(account, week=current_week):
+    block=height
+    if week != current_week:
+        block = utils.utils.get_week_end_block(week)
+    data = vault.getClaimableWithBoost(account, block_identifier=block).dict()
+    remaining_boost_data = {
+        'max_boost_allocation': data['boosted']/1e18,
+        'max_boost_remaining': data['maxBoosted']/1e18,
+        'pct_consumed': (data['boosted'] - data['maxBoosted'])/data['boosted']*100
+    }
+    return remaining_boost_data
 
 def get_boost(user, week, block=height):
     vault = Contract(constants.VAULT)
@@ -187,16 +227,8 @@ def yprisma_lp_apr(block=chain.height):
 
     rewards = [prisma, crv, cvx]
 
+    prices = utils.utils.get_prices(rewards)
 
-    # Query DefiLlama for all of our coin prices
-    coins = ','.join(f'ethereum:{k}' for k in rewards)
-    url = f'https://coins.llama.fi/prices/current/{coins}?searchWidth=40h'
-    response = requests.get(url).json()['coins']
-    response = {key.replace('ethereum:', ''): value for key, value in response.items()}
-
-    prices = {}
-    for reward in rewards:
-        prices[reward] = response[reward]['price']
     prices[lp.address] = lp_value_to_prisma * prices[prisma]
 
     reward_apr = 0
@@ -219,16 +251,8 @@ def cvxprisma_lp_apr(block=chain.height):
 
     rewards = [prisma, crv, cvx]
 
-
-    # Query DefiLlama for all of our coin prices
-    coins = ','.join(f'ethereum:{k}' for k in rewards)
-    url = f'https://coins.llama.fi/prices/current/{coins}?searchWidth=40h'
-    response = requests.get(url).json()['coins']
-    response = {key.replace('ethereum:', ''): value for key, value in response.items()}
-
-    prices = {}
-    for reward in rewards:
-        prices[reward] = response[reward]['price']
+    prices = utils.utils.get_prices(rewards)
+    
     prices[lp.address] = lp_value_to_prisma * prices[prisma]
 
     reward_apr = 0
@@ -240,14 +264,49 @@ def cvxprisma_lp_apr(block=chain.height):
 
     return reward_apr
 
-def push_to_gh(data):
+def get_boost_delegation_fees(account, start_block=0, end_block=0):
+    print('SEARCHING BOOST FEES!')
+    start_block = 18501009 if start_block == 0 else start_block
+    target_block = chain.height if end_block == 0 else end_block
+    block = start_block
+    resolution = 500
+    total = 0
+    last = vault.claimableBoostDelegationFees(
+        account, 
+        block_identifier = start_block - 1
+    ) / 1e18
+    while block < target_block:
+        claimable = vault.claimableBoostDelegationFees(
+            account, 
+            block_identifier=block
+        ) / 1e18
+        if claimable > last:
+            total += (claimable - last)
+        last = claimable
+        block += resolution
+    return total
+
+def get_last_run_data():
+    fn = 'prisma_liquid_locker_data.json'
+    if os.path.exists(fn):
+        # Read the JSON file and convert it to a dictionary
+        with open(fn, 'r') as file:
+            json_data = json.load(file)
+        result = json_data
+    else:
+        print(f"Previous run file {fn} not found")
+        return {}
+    return result
+
+def write_data_as_json(data, project_directory="", json_filename=os.getenv('JSON_FILE')):
+    json_file_path = os.path.join(project_directory,json_filename)
+    with open(json_file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+
+def fetch_from_gh(project_directory):
     home_dir = os.getenv('HOME')
     key = os.getenv('KEY')
-    os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}'
-    project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
-    json_file_directory = project_directory+'/data'
-    json_filename = os.getenv('JSON_FILE')
-
+    os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}' 
     os.chdir(project_directory)
     try:
         # Add the file to staging
@@ -258,21 +317,23 @@ def push_to_gh(data):
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
 
-    # Write the JSON object to the file
-    json_file_path = os.path.join(json_file_directory, json_filename)
-    with open(json_file_path, 'w') as file:
-        json.dump(data, file, indent=4)
+def push_to_gh(data, project_directory, json_file_path):
+    home_dir = os.getenv('HOME')
+    key = os.getenv('KEY')
+    os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}' 
 
-    # Change to the project directory
     os.chdir(project_directory)
 
     # Git commands to commit and push the changes
     try:
         # Add the file to staging
-        subprocess.run(['git', 'add', f'{json_file_directory}/{json_filename}'], check=True)
+        subprocess.run(['git', 'add', json_file_path], check=True)
 
         # Commit the changes
-        commit_message = 'Update prisma_liquid_locker_data.json'
+        current_datetime = datetime.datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        commit_message = f'{formatted_datetime} prisma_liquid_locker_data.json'
+
         subprocess.run(['git', 'commit', '-m', commit_message], check=True)
 
         # Push the changes
