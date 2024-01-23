@@ -8,7 +8,11 @@ load_dotenv()
 
 start_time = time.time()
 height = chain.height
+
 vault = Contract(constants.VAULT)
+emissions_schedule = Contract(constants.EMISSIONS_SCHEDULE)
+token_locker = Contract(constants.TOKEN_LOCKER)
+
 current_week = vault.getWeek()
 DAY = 24 * 60 * 60
 YEAR = DAY * 365
@@ -27,7 +31,9 @@ data = {
 
 def main():
     data = stats()
-
+    emissions_data = emissions_by_week()
+    data['emissions_schedule'] = emissions_data
+    print(emissions_data)
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
@@ -285,6 +291,57 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
         last = claimable
         block += resolution
     return total
+
+def emissions_by_week():
+    MAX_PCT = 10_000
+    current_week = vault.getWeek()
+    emissions_week = 0
+    weeks = []
+    for i in range(0, current_week + 2):
+        end_block = chain.height
+        rate_change = False            
+        weekly_data = {}
+        if vault.weeklyEmissions(i) > 0:
+            end_block = utils.utils.get_week_end_block(i)
+            emissions_week += 1
+            weekly_data['projected'] = False
+            weekly_data['emissions'] = vault.weeklyEmissions(i)/1e18
+            weekly_data['emissions_week'] = emissions_week
+            weekly_data['system_week'] = i
+            pct = emissions_schedule.weeklyPct(block_identifier=end_block)
+            next_update = emissions_schedule.getWeeklyPctSchedule(block_identifier=end_block)[-1]
+            if next_update[0] == i:
+                pct = next_update[1]
+                rate_change = True
+        else:
+            if i < current_week:
+                continue
+            emissions_week += 1
+            weekly_data['projected'] = True
+            weekly_data['emissions_week'] = emissions_week
+            weekly_data['system_week'] = i
+            # Calc projected
+            decay_weeks = emissions_schedule.lockDecayWeeks(block_identifier=end_block)
+            if lock_weeks > 0 and i % decay_weeks == 0:
+                lock_weeks -= 1
+            unallocated_total = vault.unallocatedTotal(block_identifier=end_block)
+            pct = emissions_schedule.weeklyPct(block_identifier=end_block)
+            next_update = emissions_schedule.getWeeklyPctSchedule(block_identifier=end_block)[-1]
+            if next_update[0] == i:
+                pct = next_update[1]
+                rate_change = True
+            weekly_data['emissions'] = (unallocated_total * pct) / MAX_PCT / 1e18
+
+        lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
+        weekly_data['lock_weeks'] = lock_weeks
+        weekly_data['emissions_rate_change_week'] = rate_change
+        weekly_data['emissions_rate_pct'] = pct
+        weekly_data['penalty_pct'] = 0 if not token_locker.penaltyWithdrawalsEnabled(block_identifier=end_block) else (
+            lock_weeks / 52 * 100
+        )
+        weeks.append(weekly_data)
+
+    return weeks
 
 def get_last_run_data():
     fn = 'prisma_liquid_locker_data.json'
