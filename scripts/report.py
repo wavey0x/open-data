@@ -299,7 +299,9 @@ def emissions_by_week():
     emissions_week = 0
     weeks = []
     net_emissions_notes = {
-        0: 'Example note to appear as tooltip.'
+        0: 'Example note to appear as tooltip.',
+        12: 'During first week, all claims were 2x boosted. Therefore, nothing was returned to vault as unallocated.',
+        15: 'Biggest week of returned emissions. Largely due to this chad making a massive unboosted claim (1x boost). [Transaction](https://etherscan.io/tx/0xbc37f09cd66896e9f1e3f2b3f56ce5783cb1438ef0010da6396e617b738bdbc4)',
     }
     for i in range(0, current_week + 2):
         end_block = chain.height
