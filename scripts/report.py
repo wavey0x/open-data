@@ -3,6 +3,7 @@ from brownie import web3, Contract, chain
 import constants, utils, requests, json, os, subprocess
 from dotenv import load_dotenv
 import time, datetime
+import pandas as pd
 
 load_dotenv()
 
@@ -297,6 +298,9 @@ def emissions_by_week():
     current_week = vault.getWeek()
     emissions_week = 0
     weeks = []
+    net_emissions_notes = {
+        0: 'Example note to appear as tooltip.'
+    }
     for i in range(0, current_week + 2):
         end_block = chain.height
         rate_change = False            
@@ -305,7 +309,7 @@ def emissions_by_week():
             end_block = utils.utils.get_week_end_block(i)
             emissions_week += 1
             weekly_data['projected'] = False
-            weekly_data['emissions'] = vault.weeklyEmissions(i)/1e18
+            weekly_data['allocated_emissions'] = vault.weeklyEmissions(i)/1e18
             weekly_data['emissions_week'] = emissions_week
             weekly_data['system_week'] = i
             pct = emissions_schedule.weeklyPct(block_identifier=end_block)
@@ -330,7 +334,21 @@ def emissions_by_week():
             if next_update[0] == i:
                 pct = next_update[1]
                 rate_change = True
-            weekly_data['emissions'] = (unallocated_total * pct) / MAX_PCT / 1e18
+            weekly_data['allocated_emissions'] = (unallocated_total * pct) / MAX_PCT / 1e18
+
+        if i <= current_week:
+            unallocated_total_start = vault.unallocatedTotal(block_identifier=utils.utils.get_week_start_block(i)) / 1e18
+            unallocated_total_end = vault.unallocatedTotal(block_identifier=end_block) / 1e18
+            # First four weeks of emissions were special due to init params. They did not impact the unallocated supply.
+            if i in [12, 13, 14, 15]:
+                weekly_data['net_emissions_returned'] = unallocated_total_end - unallocated_total_start
+            else:
+                weekly_data['net_emissions_returned'] = (
+                    weekly_data['allocated_emissions'] - 
+                    (unallocated_total_start - unallocated_total_end) # Decline in allocated
+                )
+        else:
+            weekly_data['net_emissions_returned'] = 0
 
         lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
         weekly_data['lock_weeks'] = lock_weeks
@@ -339,8 +357,30 @@ def emissions_by_week():
         weekly_data['penalty_pct'] = 0 if not token_locker.penaltyWithdrawalsEnabled(block_identifier=end_block) else (
             lock_weeks / 52 * 100
         )
+        weekly_data['net_emissions_notes'] = '' if not i in net_emissions_notes else net_emissions_notes[i]
         weeks.append(weekly_data)
 
+    # Creating a DataFrame from the list of dictionaries
+    df = pd.DataFrame(weeks)
+
+    # Renaming columns to match the requested names
+    column_mapping = {
+        'system_week': 'system week',
+        'emissions_week': 'emissions week',
+        'allocated_emissions': 'allocated emissions',
+        'net_emissions_returned': 'net emissions returned',
+        'lock_weeks': 'lock weeks',
+        'penalty_pct': 'instant withdraw penalty',
+        'net_emissions_notes': 'net emissions notes',
+    }
+
+    # Renaming and selecting the columns
+    df = df.rename(columns=column_mapping)[list(column_mapping.values())]
+
+    df['allocated emissions'] = df['allocated emissions'].astype(int).apply(lambda x: f"{x:,}")  # No decimal precision, add commas
+    df['net emissions returned'] = df['net emissions returned'].astype(int).apply(lambda x: f"{x:,}")  # No decimal precision, add commas
+    df['instant withdraw penalty'] = df['instant withdraw penalty'].round(2).astype(str) + '%'
+    # print(df)
     return weeks
 
 def get_last_run_data():
