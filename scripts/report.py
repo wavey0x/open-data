@@ -31,6 +31,15 @@ data = {
     }
 }
 
+TOKEN_INFO = {
+    '0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28': {
+        'symbol':'mkUSD',
+        'decimals':'18',
+        'price': utils.utils.get_prices(['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'])['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'],
+        'token_logo_url': 'https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png'
+    }
+}
+
 def main():
     data = stats()
     emissions_data = emissions_by_week()
@@ -296,13 +305,26 @@ def get_fees_by_week():
     logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=0)
     fee_data = {}
     for l in logs:
-        data = {}
         log_data = l.args
-        data['token'] = log_data.token
-        data['token_symbol'] = Contract(log_data.token).symbol()
-        data['amount'] = log_data.amount / 10 ** Contract(log_data.token).decimals()
-        week = log_data.week + 1 # The week it was realized
-        fee_data[week] = data
+        week = log_data.week + 1
+        if week not in fee_data:
+            fee_data[week] = []
+        amount = log_data.amount / 10 ** Contract(log_data.token).decimals()
+        value = 0
+        try:
+            value = TOKEN_INFO[log_data.token]['price'] * amount
+        except:
+            value = 0
+        fee_data[week].append(
+            {
+                'token':log_data.token,
+                'amount': amount,
+                'value': value,
+                'token_price': TOKEN_INFO[log_data.token]['price'],
+                'token_logo_url': TOKEN_INFO[log_data.token]['token_logo_url'],
+                'symbol': TOKEN_INFO[log_data.token]['symbol']
+            }
+        )
     return fee_data
 
 def emissions_by_week():
@@ -369,7 +391,15 @@ def emissions_by_week():
         else:
             weekly_data['net_emissions_returned'] = 0
 
-        weekly_data['fees_distribution'] = 0 if not i in fee_distro_by_week else fee_distro_by_week[i]
+        total_protocol_fees = 0
+        if i in fee_distro_by_week:
+            for x in fee_distro_by_week[i]:
+                total_protocol_fees += x['value']
+        protocol_fee_distribution = {
+            'total_value': total_protocol_fees,
+            'distros': [] if i not in fee_distro_by_week else fee_distro_by_week[i]
+        }
+        weekly_data['protocol_fee_distribution'] = protocol_fee_distribution
         weekly_data['lock_weeks'] = lock_weeks
         weekly_data['emissions_rate_change_week'] = rate_change
         weekly_data['emissions_rate_pct'] = pct

@@ -77,3 +77,12 @@ def get_prices(tokens=[]):
     for t in tokens:
         prices[t] = response[t]['price']
     return prices
+
+def get_token_logo_urls(token_address):
+    url = 'https://raw.githubusercontent.com/SmolDapp/tokenLists/main/lists/coingecko.json'
+    data = requests.get(url).json()
+    logo_url = ''
+    for d in data['tokens']:
+        if token_address == d['address']:
+            logo_url = d['logoURI']
+            return logo_url
