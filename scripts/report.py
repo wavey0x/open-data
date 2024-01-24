@@ -13,6 +13,7 @@ height = chain.height
 vault = Contract(constants.VAULT)
 emissions_schedule = Contract(constants.EMISSIONS_SCHEDULE)
 token_locker = Contract(constants.TOKEN_LOCKER)
+prisma_fee_distributor = Contract(constants.PRISMA_FEE_DISTRIBUTOR)
 
 current_week = vault.getWeek()
 DAY = 24 * 60 * 60
@@ -34,7 +35,6 @@ def main():
     data = stats()
     emissions_data = emissions_by_week()
     data['emissions_schedule'] = emissions_data
-    print(emissions_data)
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
@@ -272,7 +272,6 @@ def cvxprisma_lp_apr(block=chain.height):
     return reward_apr
 
 def get_boost_delegation_fees(account, start_block=0, end_block=0):
-    print('SEARCHING BOOST FEES!')
     start_block = 18501009 if start_block == 0 else start_block
     target_block = chain.height if end_block == 0 else end_block
     block = start_block
@@ -293,8 +292,22 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
         block += resolution
     return total
 
+def get_fees_by_week():
+    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=0)
+    fee_data = {}
+    for l in logs:
+        data = {}
+        log_data = l.args
+        data['token'] = log_data.token
+        data['token_symbol'] = Contract(log_data.token).symbol()
+        data['amount'] = log_data.amount / 10 ** Contract(log_data.token).decimals()
+        week = log_data.week + 1 # The week it was realized
+        fee_data[week] = data
+    return fee_data
+
 def emissions_by_week():
     MAX_PCT = 10_000
+    fee_distro_by_week = get_fees_by_week()
     current_week = vault.getWeek()
     emissions_week = 0
     weeks = []
@@ -307,6 +320,7 @@ def emissions_by_week():
         end_block = chain.height
         rate_change = False            
         weekly_data = {}
+        lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
         if vault.weeklyEmissions(i) > 0:
             end_block = utils.utils.get_week_end_block(i)
             emissions_week += 1
@@ -330,6 +344,7 @@ def emissions_by_week():
             decay_weeks = emissions_schedule.lockDecayWeeks(block_identifier=end_block)
             if lock_weeks > 0 and i % decay_weeks == 0:
                 lock_weeks -= 1
+            
             unallocated_total = vault.unallocatedTotal(block_identifier=end_block)
             pct = emissions_schedule.weeklyPct(block_identifier=end_block)
             next_update = emissions_schedule.getWeeklyPctSchedule(block_identifier=end_block)[-1]
@@ -352,7 +367,7 @@ def emissions_by_week():
         else:
             weekly_data['net_emissions_returned'] = 0
 
-        lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
+        weekly_data['fees_distribution'] = 0 if not i in fee_distro_by_week else fee_distro_by_week[i]
         weekly_data['lock_weeks'] = lock_weeks
         weekly_data['emissions_rate_change_week'] = rate_change
         weekly_data['emissions_rate_pct'] = pct
