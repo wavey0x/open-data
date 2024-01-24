@@ -320,9 +320,10 @@ def emissions_by_week():
         end_block = chain.height
         rate_change = False            
         weekly_data = {}
-        lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
+        lock_weeks = 0
         if vault.weeklyEmissions(i) > 0:
             end_block = utils.utils.get_week_end_block(i)
+            lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
             emissions_week += 1
             weekly_data['projected'] = False
             weekly_data['allocated_emissions'] = vault.weeklyEmissions(i)/1e18
@@ -342,6 +343,7 @@ def emissions_by_week():
             weekly_data['system_week'] = i
             # Calc projected
             decay_weeks = emissions_schedule.lockDecayWeeks(block_identifier=end_block)
+            lock_weeks = emissions_schedule.lockWeeks(block_identifier=end_block)
             if lock_weeks > 0 and i % decay_weeks == 0:
                 lock_weeks -= 1
             
