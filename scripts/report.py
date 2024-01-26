@@ -387,6 +387,8 @@ def emissions_by_week():
             lock_weeks / 52 * 100
         )
         weekly_data['net_emissions_notes'] = '' if not i in net_emissions_notes else net_emissions_notes[i]
+        weekly_data['week_start_ts'] = utils.utils.get_week_end_ts(i)
+        weekly_data['week_end_ts'] = utils.utils.get_week_end_ts(i)
         weeks.append(weekly_data)
 
     # Creating a DataFrame from the list of dictionaries

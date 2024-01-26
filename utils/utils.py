@@ -4,22 +4,22 @@ import constants, requests
 from datetime import datetime
 
 WEEK = 60 * 60 * 24 * 7
+token_locker = Contract(constants.TOKEN_LOCKER)
 
 def get_week_start_block(week_number=0):
     ts = get_week_start_ts(week_number)
     return closest_block_after_timestamp(ts)
 
 def get_week_start_ts(week_number=0):
-    token_locker = Contract(constants.TOKEN_LOCKER)
     current_week = token_locker.getWeek()
-    if week_number > current_week:
-        raise Exception('Week is in the future')
-    offset = current_week - week_number
+    offset = abs(current_week - week_number)
     current_week_start_ts = int(chain.time() / WEEK) * WEEK
-    return current_week_start_ts - (WEEK * offset)
+    if week_number <= current_week:
+        return current_week_start_ts - (WEEK * offset)
+    else:
+        return current_week_start_ts + (WEEK * offset)
 
 def get_week_end_block(week_number=0):
-    token_locker = Contract(constants.TOKEN_LOCKER)
     current_week = token_locker.getWeek()
     if week_number == current_week:
         return chain.height
@@ -27,10 +27,9 @@ def get_week_end_block(week_number=0):
     return closest_block_after_timestamp(ts) - 1
 
 def get_week_end_ts(week_number=0):
-    token_locker = Contract(constants.TOKEN_LOCKER)
-    current_week = token_locker.getWeek()
-    if week_number == current_week:
-        return chain.time()
+    """
+        This will always be precise. Never returns chain.time()
+    """
     start = get_week_start_ts(week_number + 1)
     return start - 1
 
