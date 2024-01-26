@@ -4,6 +4,7 @@ import constants, utils, requests, json, os, subprocess
 from dotenv import load_dotenv
 import time, datetime
 import pandas as pd
+from constants import YEAR, WEEK, DAY, EMISSIONS_START_WEEK
 
 load_dotenv()
 
@@ -14,22 +15,7 @@ vault = Contract(constants.VAULT)
 emissions_schedule = Contract(constants.EMISSIONS_SCHEDULE)
 token_locker = Contract(constants.TOKEN_LOCKER)
 prisma_fee_distributor = Contract(constants.PRISMA_FEE_DISTRIBUTOR)
-
 current_week = vault.getWeek()
-DAY = 24 * 60 * 60
-YEAR = DAY * 365
-data = {
-    'yprisma': {
-        'token': '0xe3668873d944e4a949da05fc8bde419eff543882',
-        'pool' : '0x69833361991ed76f9e8dbbcdf9ea1520febfb4a7',
-        'gauge': '0xf1ce237a1e1a88f6e289cd7998a826138aeb30b0',
-    },
-    'cvxprisma': {
-        'token': '0x34635280737b5bfe6c7dc2fc3065d60d66e78185',
-        'pool' : '0x3b21c2868b6028cfb38ff86127ef22e68d16d53b',
-        'gauge': '0x13e58c7b1147385d735a06d14f0456e54c2debc8',
-    }
-}
 
 TOKEN_INFO = {
     '0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28': {
@@ -58,8 +44,6 @@ def main():
     print(f"Total run time: {duration:.2f} seconds")
 
 def stats():
-    START_WEEK = 12
-    token_locker = Contract(constants.TOKEN_LOCKER)
     last_run_data = get_last_run_data() # Re-using old data helps us speed up expensive repetitive block queries
     data = {
         'prisma_week': token_locker.getWeek(),
@@ -81,10 +65,7 @@ def stats():
             },
         }
     }
-
-    token_locker = Contract(constants.TOKEN_LOCKER)
     
-
     liquid_lockers = {
         'cvxPrisma': constants.CONVEX_LOCKER,
         'yPRISMA': constants.YEARN_LOCKER
@@ -100,7 +81,7 @@ def stats():
             boost_fees_cache = {item['week_number']: item['boost_fees_collected'] for item in weekly_data_cache}
         except:
             print(f'Cannot parse past data.')
-        for target_week in range(START_WEEK, current_week + 1):
+        for target_week in range(EMISSIONS_START_WEEK, current_week + 1):
             week_data = {}
             print(f'Week: {target_week}')
             token_locker.getTotalWeightAt(target_week)
@@ -149,7 +130,6 @@ def get_remaining_weekly_boost(account, week=current_week):
     return remaining_boost_data
 
 def get_boost(user, week, block=height):
-    vault = Contract(constants.VAULT)
     calculator = Contract(vault.boostCalculator(block_identifier=block))
 
     key = web3.keccak(

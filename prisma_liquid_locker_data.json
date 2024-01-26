@@ -1,6 +1,6 @@
 {
-    "prisma_week": 23,
-    "updated_at": 1706104817,
+    "prisma_week": 24,
+    "updated_at": 1706269712,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -175,22 +175,37 @@
                 },
                 {
                     "week_number": 23,
-                    "peg": 0.7821173143818508,
-                    "lock_gain": 695500.0,
+                    "peg": 0.7691978261916491,
+                    "lock_gain": 735543.0,
                     "current_boost_multiplier": 2.0,
-                    "global_weight_ratio": 0.4772565713589784,
-                    "global_weight": 1245510712,
-                    "weight": 594428172,
+                    "global_weight_ratio": 0.4728451721618257,
+                    "global_weight": 1261534310,
+                    "weight": 596510408,
                     "remaining_boost_data": {
                         "max_boost_allocation": 938491.8813920912,
-                        "max_boost_remaining": 246652.3310166716,
-                        "pct_consumed": 73.7182243227501
+                        "max_boost_remaining": 141447.83147159437,
+                        "pct_consumed": 84.92817740076974
+                    },
+                    "boost_fees_collected": 0
+                },
+                {
+                    "week_number": 24,
+                    "peg": 0.8105367288214917,
+                    "lock_gain": 99147.0,
+                    "current_boost_multiplier": 2.0,
+                    "global_weight_ratio": 0.4709310941690646,
+                    "global_weight": 1277609526,
+                    "weight": 601666052,
+                    "remaining_boost_data": {
+                        "max_boost_allocation": 765289.4771243469,
+                        "max_boost_remaining": 666747.4209614263,
+                        "pct_consumed": 12.876442066497805
                     },
                     "boost_fees_collected": 0
                 }
             ],
-            "current_staking_apr": 0.7835180420891708,
-            "current_lp_apr": 2.120662073231829
+            "current_staking_apr": 1.0092066920186356,
+            "current_lp_apr": 1.7941080797870164
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -365,22 +380,37 @@
                 },
                 {
                     "week_number": 23,
-                    "peg": 0.857000837897459,
-                    "lock_gain": 524273.0,
-                    "current_boost_multiplier": 1.5771442446708017,
-                    "global_weight_ratio": 0.20279341282774932,
-                    "global_weight": 1245510712,
-                    "weight": 252581368,
+                    "peg": 0.8504857720899366,
+                    "lock_gain": 533041.0,
+                    "current_boost_multiplier": 1.5475123442243315,
+                    "global_weight_ratio": 0.20057901080787885,
+                    "global_weight": 1261534310,
+                    "weight": 253037304,
                     "remaining_boost_data": {
                         "max_boost_allocation": 378782.98762048973,
                         "max_boost_remaining": 0.0,
                         "pct_consumed": 100.0
                     },
                     "boost_fees_collected": 0
+                },
+                {
+                    "week_number": 24,
+                    "peg": 0.9069782869538727,
+                    "lock_gain": 324128.0,
+                    "current_boost_multiplier": 2.0,
+                    "global_weight_ratio": 0.21124761087606356,
+                    "global_weight": 1277609526,
+                    "weight": 269891960,
+                    "remaining_boost_data": {
+                        "max_boost_allocation": 324632.7017271928,
+                        "max_boost_remaining": 1496.3150566045456,
+                        "pct_consumed": 99.53907445286828
+                    },
+                    "boost_fees_collected": 0
                 }
             ],
-            "current_staking_apr": 1.442184775366132,
-            "current_lp_apr": 2.8864877052026063
+            "current_staking_apr": 1.2794389236168593,
+            "current_lp_apr": 2.115759999142546
         }
     },
     "emissions_schedule": [
@@ -390,11 +420,15 @@
             "emissions_week": 1,
             "system_week": 12,
             "net_emissions_returned": 0.0,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 26,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
             "penalty_pct": 50.0,
-            "net_emissions_notes": ""
+            "net_emissions_notes": "During first week, all claims were 2x boosted. Therefore, nothing was returned to vault as unallocated."
         },
         {
             "projected": false,
@@ -402,6 +436,10 @@
             "emissions_week": 2,
             "system_week": 13,
             "net_emissions_returned": 175279.22039604187,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 26,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -414,6 +452,10 @@
             "emissions_week": 3,
             "system_week": 14,
             "net_emissions_returned": 34926.47572365403,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 26,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -426,11 +468,15 @@
             "emissions_week": 4,
             "system_week": 15,
             "net_emissions_returned": 714426.3963953555,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 26,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
             "penalty_pct": 50.0,
-            "net_emissions_notes": ""
+            "net_emissions_notes": "Biggest week of returned emissions. Largely due to this chad making a massive unboosted claim (1x boost). [Transaction](https://etherscan.io/tx/0xbc37f09cd66896e9f1e3f2b3f56ce5783cb1438ef0010da6396e617b738bdbc4)"
         },
         {
             "projected": false,
@@ -438,6 +484,10 @@
             "emissions_week": 5,
             "system_week": 16,
             "net_emissions_returned": 79932.79129844205,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 25,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -450,6 +500,10 @@
             "emissions_week": 6,
             "system_week": 17,
             "net_emissions_returned": 21869.87784907641,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 25,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -462,6 +516,10 @@
             "emissions_week": 7,
             "system_week": 18,
             "net_emissions_returned": 81379.6982196751,
+            "protocol_fee_distribution": {
+                "total_value": 0,
+                "distros": []
+            },
             "lock_weeks": 24,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -474,6 +532,19 @@
             "emissions_week": 8,
             "system_week": 19,
             "net_emissions_returned": 22645.81562172505,
+            "protocol_fee_distribution": {
+                "total_value": 99213.9555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 99850.0,
+                        "value": 99213.9555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
             "lock_weeks": 24,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -486,6 +557,19 @@
             "emissions_week": 9,
             "system_week": 20,
             "net_emissions_returned": 45910.01002510311,
+            "protocol_fee_distribution": {
+                "total_value": 99213.9555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 99850.0,
+                        "value": 99213.9555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
             "lock_weeks": 23,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -498,6 +582,19 @@
             "emissions_week": 10,
             "system_week": 21,
             "net_emissions_returned": 21216.548054807354,
+            "protocol_fee_distribution": {
+                "total_value": 99213.9555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 99850.0,
+                        "value": 99213.9555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
             "lock_weeks": 23,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -510,6 +607,19 @@
             "emissions_week": 11,
             "system_week": 22,
             "net_emissions_returned": 24193.67791180266,
+            "protocol_fee_distribution": {
+                "total_value": 99213.9555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 99850.0,
+                        "value": 99213.9555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
             "lock_weeks": 22,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -521,7 +631,20 @@
             "allocated_emissions": 1965487.9763863187,
             "emissions_week": 12,
             "system_week": 23,
-            "net_emissions_returned": 20160.435631881235,
+            "net_emissions_returned": 22616.686813245295,
+            "protocol_fee_distribution": {
+                "total_value": 99213.9555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 99850.0,
+                        "value": 99213.9555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
             "lock_weeks": 22,
             "emissions_rate_change_week": false,
             "emissions_rate_pct": 120,
@@ -529,15 +652,53 @@
             "net_emissions_notes": ""
         },
         {
-            "projected": true,
+            "projected": false,
+            "allocated_emissions": 1618477.9340928681,
             "emissions_week": 13,
             "system_week": 24,
-            "allocated_emissions": 1618453.3715810548,
-            "net_emissions_returned": 0,
-            "lock_weeks": 22,
-            "emissions_rate_change_week": true,
+            "net_emissions_returned": 934.6004738397896,
+            "protocol_fee_distribution": {
+                "total_value": 158831.7555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 159850.0,
+                        "value": 158831.7555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
+            "lock_weeks": 21,
+            "emissions_rate_change_week": false,
             "emissions_rate_pct": 100,
-            "penalty_pct": 42.30769230769231,
+            "penalty_pct": 40.38461538461539,
+            "net_emissions_notes": ""
+        },
+        {
+            "projected": true,
+            "emissions_week": 14,
+            "system_week": 25,
+            "allocated_emissions": 1602302.500756678,
+            "net_emissions_returned": 0,
+            "protocol_fee_distribution": {
+                "total_value": 158831.7555,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 159850.0,
+                        "value": 158831.7555,
+                        "token_price": 0.99363,
+                        "token_logo_url": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
+            },
+            "lock_weeks": 21,
+            "emissions_rate_change_week": false,
+            "emissions_rate_pct": 100,
+            "penalty_pct": 40.38461538461539,
             "net_emissions_notes": ""
         }
     ]
