@@ -100,7 +100,9 @@ def stats():
             week_data['weight']= w
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
             if (
-                target_week == current_week or len(boost_fees_cache) == 0 or not target_week in boost_fees_cache
+                target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
+                len(boost_fees_cache) == 0 
+                or not target_week in boost_fees_cache
             ):
                 week_data['boost_fees_collected'] = get_boost_delegation_fees(account, start_block=start_block, end_block=end_block)
             else:
@@ -387,7 +389,7 @@ def emissions_by_week():
             lock_weeks / 52 * 100
         )
         weekly_data['net_emissions_notes'] = '' if not i in net_emissions_notes else net_emissions_notes[i]
-        weekly_data['week_start_ts'] = utils.utils.get_week_end_ts(i)
+        weekly_data['week_start_ts'] = utils.utils.get_week_start_ts(i)
         weekly_data['week_end_ts'] = utils.utils.get_week_end_ts(i)
         weeks.append(weekly_data)
 
