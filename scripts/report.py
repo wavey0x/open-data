@@ -28,8 +28,8 @@ TOKEN_INFO = {
 
 def main():
     data = stats()
-    emissions_data = emissions_by_week()
-    data['emissions_schedule'] = emissions_data
+    data['emissions_schedule'] = emissions_by_week()
+    data['distribution_schedule'] = distribution_schedule()
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
@@ -65,15 +65,10 @@ def stats():
             },
         }
     }
-    
-    liquid_lockers = {
-        'cvxPrisma': constants.CONVEX_LOCKER,
-        'yPRISMA': constants.YEARN_LOCKER
-    }
 
-    for l in liquid_lockers:
-        account = liquid_lockers[l]
+    for l in data['liquid_lockers'].keys():
         d = data['liquid_lockers'][l]
+        account = d['locker']
         weekly_data = []
         boost_fees_cache = {}
         try:
@@ -415,6 +410,30 @@ def emissions_by_week():
     df['instant withdraw penalty'] = df['instant withdraw penalty'].round(2).astype(str) + '%'
     # print(df)
     return weeks
+
+def distribution_schedule():
+    checkpoints = emissions_schedule.getWeeklyPctSchedule(block_identifier=utils.utils.get_week_end_block(12))
+    schedule = []
+    schedule.append(
+            {
+                'week': 5 + EMISSIONS_START_WEEK,
+                'rate': 1.2,
+                'start_ts': utils.utils.get_week_start_ts(5),
+            }
+        )
+    for item in reversed(checkpoints):
+        week = item[0]
+        start = utils.utils.get_week_start_ts(week)
+        schedule[-1]['end_ts'] = start - 1
+        schedule.append(
+            {
+                'week': week,
+                'rate': item[1] / 100,
+                'start_ts': utils.utils.get_week_start_ts(week),
+            }
+        )
+    schedule[-1]['end_ts'] = 0
+    return schedule
 
 def get_last_run_data():
     fn = 'prisma_liquid_locker_data.json'
