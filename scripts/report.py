@@ -414,13 +414,22 @@ def emissions_by_week():
 def distribution_schedule():
     checkpoints = emissions_schedule.getWeeklyPctSchedule(block_identifier=utils.utils.get_week_end_block(12))
     schedule = []
+    initial_emissions_end = utils.utils.get_week_start_ts(3 + EMISSIONS_START_WEEK) - 1
     schedule.append(
-            {
-                'week': 5 + EMISSIONS_START_WEEK,
-                'rate': 1.2,
-                'start_ts': utils.utils.get_week_start_ts(5),
-            }
-        )
+        {
+            'week': EMISSIONS_START_WEEK,
+            'rate': 0,
+            'start_ts': utils.utils.get_week_start_ts(EMISSIONS_START_WEEK),
+            'end_ts': initial_emissions_end,
+        }
+    )
+    schedule.append(
+        {
+            'week': 4 + EMISSIONS_START_WEEK,
+            'rate': 1.2,
+            'start_ts': initial_emissions_end + 1,
+        }
+    )
     for item in reversed(checkpoints):
         week = item[0]
         start = utils.utils.get_week_start_ts(week)
