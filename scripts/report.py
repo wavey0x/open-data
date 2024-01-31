@@ -93,6 +93,8 @@ def stats():
             week_data['global_weight_ratio'] = w / total_weight
             week_data['global_weight'] = total_weight
             week_data['weight']= w
+            boost_data = get_maxboost_and_decay(account, target_week, block=start_block)
+            # assert False
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
             if (
                 target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
@@ -118,17 +120,45 @@ def get_remaining_weekly_boost(account, week=current_week):
     block=height
     if week != current_week:
         block = utils.utils.get_week_end_block(week)
-    data = vault.getClaimableWithBoost(account, block_identifier=block).dict()
+    start_block = utils.utils.get_week_start_block(week)
+    
+    week_start_data = get_maxboost_and_decay(account, week, block=start_block)
+    week_end_data = get_maxboost_and_decay(account, week, block=block)
+
     remaining_boost_data = {
-        'max_boost_allocation': data['boosted']/1e18,
-        'max_boost_remaining': data['maxBoosted']/1e18,
-        'pct_consumed': (data['boosted'] - data['maxBoosted'])/data['boosted']*100
+        'max_boost_allocation': week_start_data['maxBoosted']/1e18,
+        'decay_boost_allocation': week_start_data['boosted']/1e18,
+        'max_boost_remaining': week_end_data['maxBoosted']/1e18,
+        'decay_boost_remaining': week_end_data['boosted']/1e18,
+        'pct_max_consumed': (week_start_data['maxBoosted'] - week_end_data['maxBoosted'])/week_start_data['maxBoosted']*100,
+        # The following will be bugged using the initial calculator. Only week 24+ will return proper amounts.
+        'pct_decay_consumed': (week_start_data['boosted'] - week_end_data['boosted'])/week_start_data['boosted']*100
     }
     return remaining_boost_data
 
 def get_boost(user, week, block=height):
     calculator = Contract(vault.boostCalculator(block_identifier=block))
 
+    account_weekly_earned = get_account_weekly_earned(user, week, block=height)
+
+    boost = calculator.getBoostedAmount(
+        user,
+        2e18,
+        account_weekly_earned,
+        vault.weeklyEmissions(week, block_identifier=block),
+        block_identifier=block
+    ) / 1e18
+
+    return boost
+
+def get_maxboost_and_decay(user, week, block=height):
+    total_weekly = vault.weeklyEmissions(week)
+    account_weekly_earned = get_account_weekly_earned(user, week, block)
+    calculator = Contract(vault.boostCalculator(block_identifier=block))
+    return calculator.getClaimableWithBoost(user, account_weekly_earned, total_weekly).dict()
+
+def get_account_weekly_earned(user, week, block=height):
+    # compute accountWeeklyEarned storage key
     key = web3.keccak(
         hexstr="00" * 12
         + user[2:]
@@ -141,15 +171,7 @@ def get_boost(user, week, block=height):
     else:
         account_weekly_earned = data % 2**128
 
-    boost = calculator.getBoostedAmount(
-        user,
-        2e18,
-        account_weekly_earned,
-        vault.weeklyEmissions(week, block_identifier=block),
-        block_identifier=block
-    ) / 1e18
-
-    return boost
+    return account_weekly_earned
 
 def get_peg(pool, amt=100, block=chain.height):
     pool = Contract(pool)
