@@ -584,8 +584,9 @@ def cache_ens():
     logs = vault.events.BoostDelegationSet.getLogs(fromBlock=0)
     for log in logs:
         d = log.args['boostDelegate']
-        if d not in ens_data:
+        if d not in ens_data or ens_data[d] is None:
             ens = web3.ens.name(d)
+            ens = '' if ens is None or ens == 'null' else ens
             ens_data[d] = ens
             print(d, ens)
 
