@@ -1,5 +1,5 @@
 
-from brownie import web3, Contract, chain
+from brownie import web3, Contract, chain, ZERO_ADDRESS
 import constants, utils, requests, json, os, subprocess
 from dotenv import load_dotenv
 import time, datetime
@@ -30,6 +30,7 @@ def main():
     data = stats()
     data['emissions_schedule'] = emissions_by_week()
     data['distribution_schedule'] = distribution_schedule()
+    data['active_fowarders'] = get_active_forwarders()
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
@@ -135,6 +136,40 @@ def get_remaining_weekly_boost(account, week=current_week):
         'pct_decay_consumed': (week_start_data['boosted'] - week_end_data['boosted'])/week_start_data['boosted']*100
     }
     return remaining_boost_data
+
+def get_active_forwarders():
+    week = vault.getWeek()
+    factory = Contract(constants.BOOST_FACTORY)
+    logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
+    fee = 0
+    active_delegates = []
+    for log in logs:
+        d = log.args['boostDelegate']
+        # fwd = Contract(factory.forwarder(d))
+        if factory.isForwarderActive(d) and d not in active_delegates:
+            active_delegates.append(d)
+
+    active_delegate_list = []
+    for d in active_delegates:
+        boost_data = get_remaining_weekly_boost(d, week)
+        fee_callback = factory.feeCallback(d)
+        if fee_callback == ZERO_ADDRESS:
+            fee = Contract(constants.VAULT).boostDelegation(d)['feePct']
+        else:
+            fee_callback = Contract(fee_callback)
+            fee = fee_callback.getFeePct(
+                ZERO_ADDRESS,
+                ZERO_ADDRESS,
+                d,
+                1_000e18,
+                0,
+                0,
+            )
+        boost_data['fee'] = fee
+        boost_data['boost_delegate'] = d
+        active_delegate_list.append(boost_data)
+    
+    return active_delegate_list
 
 def get_boost(user, week, block=height):
     calculator = Contract(vault.boostCalculator(block_identifier=block))
