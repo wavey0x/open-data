@@ -168,10 +168,9 @@ def get_active_forwarders():
             )
         boost_data['fee'] = fee
         boost_data['boost_delegate'] = d
-        boost_data['ens'] = ''
+        boost_data['delegate_ens'] = ''
         if d in ens_data and not ens_data[d] is None:
-            boost_data['ens'] = ens_data[d]
-        boost_data['delegate_ens'] = ens_data[d]
+            boost_data['delegate_ens'] = ens_data[d]
         active_delegate_list.append(boost_data)
     
     return active_delegate_list
