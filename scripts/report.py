@@ -126,21 +126,32 @@ def get_remaining_weekly_boost(account, week=current_week):
     week_start_data = get_maxboost_and_decay(account, week, block=start_block)
     week_end_data = get_maxboost_and_decay(account, week, block=block)
 
+    max_allocation = week_start_data['maxBoosted']/1e18
+    max_remaining = week_end_data['maxBoosted']/1e18
+    max_consumed = max_allocation - max_remaining
     if week < 25:
         decay_allocation = week_start_data['boosted']/1e18
         decay_remaining = week_end_data['boosted']/1e18
+        decay_consumed = decay_allocation - decay_remaining
     else:
-        decay_allocation = week_start_data['boosted']/1e18 - (week_start_data['maxBoosted']/1e18)
-        decay_remaining = week_end_data['boosted']/1e18 - (week_start_data['maxBoosted']/1e18)
+        decay_allocation = week_start_data['boosted']/1e18 - max_allocation
+        decay_remaining = week_end_data['boosted']/1e18 + max_consumed - max_allocation
+        decay_consumed = decay_allocation - decay_remaining
+        # decay_consumed = 
+        # decay_remaining = (
+        #     decay_allocation
+        #     week_end_data['boosted']/1e18 + 
+        #     week_start_data['maxBoosted']/1e18
+        # )
 
     remaining_boost_data = {
-        'max_boost_allocation': week_start_data['maxBoosted']/1e18,
+        'max_boost_allocation': max_allocation,
         'decay_boost_allocation': decay_allocation,
-        'max_boost_remaining': week_end_data['maxBoosted']/1e18,
+        'max_boost_remaining': max_remaining,
         'decay_boost_remaining': decay_remaining,
-        'pct_max_consumed': (week_start_data['maxBoosted'] - week_end_data['maxBoosted'])/week_start_data['maxBoosted']*100,
+        'pct_max_consumed': int(max_consumed)/int(max_allocation)*100,
         # The following will be bugged using the initial calculator. Only week 24+ will return proper amounts.
-        'pct_decay_consumed': (decay_allocation - decay_remaining)/decay_allocation*100
+        'pct_decay_consumed': int(decay_consumed)/int(decay_allocation)*100
     }
     return remaining_boost_data
 
