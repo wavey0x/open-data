@@ -1,6 +1,6 @@
 from brownie import interface, chain, web3
 from web3._utils.events import construct_event_topic_set
-import os, json, datetime, time, utils
+import os, json, datetime, time, utils, subprocess
 import duckdb
 
 MAX_RANGE = 50_000
@@ -87,3 +87,34 @@ def run_queries():
         output_file = f'{dir_path}{file_name}'
         duckdb_conn.execute(f"COPY ({sql}) TO '{output_file}'")
         print(f'Query results saved to {output_file}')
+
+    project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
+    if os.getenv('ENV') != 'dev':
+        push_to_gh(project_directory)
+
+def push_to_gh(project_directory):
+    home_dir = os.getenv('HOME')
+    key = os.getenv('KEY')
+    os.environ['GIT_SSH_COMMAND'] = f'ssh -i {home_dir}/.ssh/{key}' 
+
+    os.chdir(project_directory)
+
+    # Git commands to commit and push the changes
+    try:
+        # Add the file to staging
+        subprocess.run(['git', 'add', 'query_results/', 'raw_boost_data.json'], check=True)
+
+        # Commit the changes
+        current_datetime = datetime.datetime.now()
+        formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        commit_message = f'{formatted_datetime} boost logs'
+
+        subprocess.run(['git', 'commit', '-m', commit_message], check=True)
+
+        # Push the changes
+        subprocess.run(['git', 'push', '--force-with-lease', '--force'], check=True)
+
+        print("Changes committed and pushed to GitHub successfully.")
+
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
