@@ -6,6 +6,13 @@ from datetime import datetime
 WEEK = 60 * 60 * 24 * 7
 token_locker = Contract(constants.TOKEN_LOCKER)
 
+def get_week_by_ts(ts):
+    first_week = 1691625600
+    if ts < first_week:
+        raise Exception("timestamp is before protocol launch")
+    diff = ts - first_week
+    return diff // WEEK
+
 def get_week_start_block(week_number=0):
     ts = get_week_start_ts(week_number)
     return closest_block_after_timestamp(ts)
@@ -49,7 +56,7 @@ def closest_block_after_timestamp(timestamp: int) -> int:
             lo = mid
 
     if get_block_timestamp(hi) < timestamp:
-        raise IndexError('timestamp is in the future')
+        raise Exception("timestamp is in the future")
 
     return hi
 
