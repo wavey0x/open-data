@@ -102,15 +102,15 @@ def run_queries():
         ),
         (
             "top_boost_delegates_by_fees_earned.json",
-            f"SELECT boost_delegate, SUM(fee) AS earned_fees FROM {TABLE} GROUP BY boost_delegate ORDER BY earned_fees DESC"
+            f"SELECT boost_delegate, SUM(fee) AS earned_fees FROM {TABLE} GROUP BY boost_delegate ORDER BY earned_fees DESC, account"
         ),
         (
             "top_accounts_by_total_emissions_claimed.json", 
-            f"SELECT account, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY account ORDER BY amount DESC"
+            f"SELECT account, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY account ORDER BY amount DESC, account"
         ),
         (
             "top_receivers_by_emissions_claimed.json", 
-            f"SELECT receiver, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY receiver ORDER BY amount DESC"
+            f"SELECT receiver, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY receiver ORDER BY amount DESC, account"
         )
     ]
 
