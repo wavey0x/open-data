@@ -101,19 +101,19 @@ def run_queries():
     queries = [
         (
             "top_accounts_by_fees_paid.json", 
-            f"SELECT account, SUM(fee) AS total_fees_paid FROM {TABLE} GROUP BY account ORDER BY total_fees_paid DESC, account"
+            f"SELECT account, account_ens as ens, SUM(fee) AS total_fees_paid FROM {TABLE} GROUP BY account, account_ens ORDER BY total_fees_paid DESC, account"
         ),
         (
             "top_boost_delegates_by_fees_earned.json",
-            f"SELECT boost_delegate, SUM(fee) AS earned_fees FROM {TABLE} GROUP BY boost_delegate ORDER BY earned_fees DESC, boost_delegate"
+            f"SELECT boost_delegate, boost_delegate_ens as ens, SUM(fee) AS earned_fees FROM {TABLE} GROUP BY boost_delegate, boost_delegate_ens ORDER BY earned_fees DESC, boost_delegate"
         ),
         (
             "top_accounts_by_total_emissions_claimed.json", 
-            f"SELECT account, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY account ORDER BY amount DESC, account"
+            f"SELECT account, account_ens as ens, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY account, account_ens ORDER BY amount DESC, account"
         ),
         (
             "top_receivers_by_emissions_claimed.json", 
-            f"SELECT receiver, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY receiver ORDER BY amount DESC, receiver"
+            f"SELECT receiver, receiver_ens as ens, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY receiver, receiver_ens ORDER BY amount DESC, receiver"
         )
     ]
 
