@@ -85,8 +85,16 @@ def run_queries():
 
     for file_name, sql in queries:
         output_file = f'{dir_path}{file_name}'
-        duckdb_conn.execute(f"COPY ({sql}) TO '{output_file}'")
-        print(f'Query results saved to {output_file}')
+        duckdb_conn.execute(f"COPY ({sql}) TO '{output_file}' (FORMAT 'JSON')")
+        # Read the input file and split it into lines
+        with open(output_file, 'r') as file:
+            json_objects = [json.loads(line) for line in file if line.strip()]
+
+        # Write the list of JSON objects as a valid JSON array to the output file
+        with open(output_file, 'w') as file:
+            json.dump(json_objects, file, indent=4)
+
+        print(f"Formatted query results to json an saved results to '{output_file}'.")
 
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     if os.getenv('ENV') != 'dev':
