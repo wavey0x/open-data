@@ -4,7 +4,7 @@ import constants, utils, requests, json, os, subprocess
 from dotenv import load_dotenv
 import time, datetime
 import pandas as pd
-from constants import YEAR, WEEK, DAY, EMISSIONS_START_WEEK
+from constants import YEAR, EMISSIONS_START_WEEK
 
 load_dotenv()
 
