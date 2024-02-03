@@ -2,6 +2,7 @@ from brownie import interface, chain, web3
 from web3._utils.events import construct_event_topic_set
 import os, json, datetime, time, utils, subprocess
 import duckdb
+import pandas as pd
 
 MAX_RANGE = 50_000
 DEPLOY_BLOCK = 18_029_884
@@ -17,6 +18,7 @@ def get_logs():
     if os.path.exists(FILE_PATH):
         with open(FILE_PATH) as file:
             data = json.load(file)
+            data = data['data'] if isinstance(data, dict) else data
             last_item = data[-1] if data else None
 
     to_block = last_item['block'] if last_item else DEPLOY_BLOCK
@@ -40,9 +42,14 @@ def get_logs():
 
         mode = 'w' if not os.path.exists(FILE_PATH) else 'r+'
         with open(FILE_PATH, mode) as file:
-            existing_data = json.load(file) if mode == 'r+' else []
+            existing_data = json.load(file) if mode == 'r+' else {}
+            existing_data = existing_data['data'] if isinstance(existing_data, dict) else existing_data
             file.seek(0)
-            json.dump(existing_data + formatted_events, file, indent=2)
+            data = {
+                'last_updated': chain.time(),
+                'data': existing_data + formatted_events
+            }
+            json.dump(data, file, indent=2)
             file.truncate()
 
         print(f'Processed {len(events)} events. Loop took {time.time() - overall_start_time} seconds.')
@@ -56,6 +63,8 @@ def process_logs():
     with open(FILE_PATH) as file:
         data = json.load(file)
 
+    data = data['data'] if isinstance(data, dict) else data
+
     for d in data:
         if 'timestamp' not in d:
             block_info = chain[d['block']]
@@ -67,32 +76,55 @@ def process_logs():
             })
 
     with open(FILE_PATH, 'w') as file:
+        data = {
+            'last_updated': chain.time(),
+            'data': data
+        }
         json.dump(data, file, indent=4)
 
 def run_queries():
     process_logs()
     dir_path = 'query_results/'
-    FILE_PATH = 'raw_boost_data.json'
-    os.makedirs(dir_path, exist_ok=True)
-    duckdb_conn = duckdb.connect()
+    TABLE = 'boost_data'
+
+    with open(FILE_PATH) as file:
+        data = json.load(file)
+
+    df = pd.DataFrame(data['data'])
+    last_updated = data['last_updated']
+    conn = duckdb.connect(database=':memory:', read_only=False)
+    conn.register(TABLE, df)
 
     queries = [
-        ("top_accounts_by_fees_paid.json", f"SELECT account, SUM(fee) AS total_fees_paid FROM {FILE_PATH} GROUP BY account ORDER BY total_fees_paid DESC"),
-        ("top_boost_delegates_by_fees_earned.json", f"SELECT boost_delegate, SUM(fee) AS earned_fees FROM {FILE_PATH} GROUP BY boost_delegate ORDER BY earned_fees DESC"),
-        ("top_accounts_by_total_emissions_claimed.json", f"SELECT account, SUM(adjusted_amount) AS amount FROM {FILE_PATH} GROUP BY account ORDER BY amount DESC"),
-        ("top_receivers_by_emissions_claimed.json", f"SELECT receiver, SUM(adjusted_amount) AS amount FROM {FILE_PATH} GROUP BY receiver ORDER BY amount DESC")
+        (
+            "top_accounts_by_fees_paid.json", 
+            f"SELECT account, SUM(fee) AS total_fees_paid FROM {TABLE} GROUP BY account ORDER BY total_fees_paid DESC"
+        ),
+        (
+            "top_boost_delegates_by_fees_earned.json",
+            f"SELECT boost_delegate, SUM(fee) AS earned_fees FROM {TABLE} GROUP BY boost_delegate ORDER BY earned_fees DESC"
+        ),
+        (
+            "top_accounts_by_total_emissions_claimed.json", 
+            f"SELECT account, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY account ORDER BY amount DESC"
+        ),
+        (
+            "top_receivers_by_emissions_claimed.json", 
+            f"SELECT receiver, SUM(adjusted_amount) AS amount FROM {TABLE} GROUP BY receiver ORDER BY amount DESC"
+        )
     ]
 
     for file_name, sql in queries:
         output_file = f'{dir_path}{file_name}'
-        duckdb_conn.execute(f"COPY ({sql}) TO '{output_file}' (FORMAT 'JSON')")
-        # Read the input file and split it into lines
-        with open(output_file, 'r') as file:
-            json_objects = [json.loads(line) for line in file if line.strip()]
-
+        result = conn.execute(f"{sql}").fetchdf()
+        data = result.to_dict(orient='records')
+        output = {
+            'data': data,
+            'last_updated': last_updated
+        }
         # Write the list of JSON objects as a valid JSON array to the output file
         with open(output_file, 'w') as file:
-            json.dump(json_objects, file, indent=4)
+            json.dump(output, file, indent=4)
 
         print(f"Formatted query results to json an saved results to '{output_file}'.")
 
