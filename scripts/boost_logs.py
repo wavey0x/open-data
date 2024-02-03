@@ -67,6 +67,9 @@ def process_logs():
 
     for d in data:
         if 'timestamp' not in d:
+            d['account_ens'] = utils.utils.get_ens_from_cache(d['account'])
+            d['receiver_ens'] = utils.utils.get_ens_from_cache(d['receiver'])
+            d['boost_delegate_ens'] = utils.utils.get_ens_from_cache(d['boost_delegate'])
             block_info = chain[d['block']]
             ts = block_info.timestamp
             d.update({

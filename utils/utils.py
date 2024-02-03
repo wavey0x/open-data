@@ -1,6 +1,6 @@
 import constants 
 from brownie import ZERO_ADDRESS, Contract, web3, accounts, chain
-import constants, requests
+import constants, requests, json
 from datetime import datetime
 
 WEEK = 60 * 60 * 24 * 7
@@ -92,3 +92,44 @@ def get_token_logo_urls(token_address):
         if token_address == d['address']:
             logo_url = d['logoURI']
             return logo_url
+
+def get_ens_from_cache(address):
+    ens_data = load_from_json('ens_cache.json')
+    if address in ens_data:
+        return ens_data[address]
+    return ''
+
+def cache_ens():
+    ens_data = load_from_json('ens_cache.json')
+    if ens_data is None:
+        ens_data = {}
+
+    records = load_from_json('raw_boost_data.json')['data']
+
+    count = 0
+    for record in records:
+        a, r, d = record['account'], record['receiver'], record['boost_delegate']
+        count += 1
+        for address in [a, r, d]:
+            if address == ZERO_ADDRESS:
+                continue
+            # if address not in ens_data or ens_data[address] is '':
+            if address not in ens_data:
+                ens = web3.ens.name(address)
+                ens = '' if ens is None or ens == 'null' else ens
+                ens_data[address] = ens
+                print(address, ens)
+    cache_to_json('ens_cache.json', ens_data)
+
+# Loading the dictionary from a JSON file
+def load_from_json(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return None
+    
+# Saving the dictionary to a JSON file
+def cache_to_json(file_path, data_dict):
+    with open(file_path, 'w') as file:
+        json.dump(data_dict, file, indent=4)

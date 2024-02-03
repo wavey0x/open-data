@@ -158,7 +158,7 @@ def get_remaining_weekly_boost(account, week=current_week):
     return remaining_boost_data
 
 def get_active_forwarders():
-    ens_data = load_from_json('ens_cache.json')
+    ens_data = utils.utils.load_from_json('ens_cache.json')
     week = vault.getWeek()
     factory = Contract(constants.BOOST_FACTORY)
     logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
@@ -583,31 +583,6 @@ def push_to_gh(data, project_directory, json_file_path):
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
 
-# Saving the dictionary to a JSON file
-def cache_to_json(file_path, data_dict):
-    with open(file_path, 'w') as file:
-        json.dump(data_dict, file)
-
-# Loading the dictionary from a JSON file
-def load_from_json(file_path):
-    try:
-        with open(file_path, 'r') as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return None
     
 def cache_ens():
-    ens_data = load_from_json('ens_cache.json')
-    if ens_data is None:
-        ens_data = {}
-    logs = vault.events.BoostDelegationSet.getLogs(fromBlock=0)
-    for log in logs:
-        d = log.args['boostDelegate']
-        if d not in ens_data or ens_data[d] is None:
-            ens = web3.ens.name(d)
-            ens = '' if ens is None or ens == 'null' else ens
-            ens_data[d] = ens
-            print(d, ens)
-
-    cache_to_json('ens_cache.json', ens_data)
-    
+    utils.utils.cache_ens()
