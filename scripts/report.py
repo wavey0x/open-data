@@ -138,8 +138,8 @@ def get_remaining_weekly_boost(account, week=current_week):
         decay_consumed = (week_start_data['boosted']/1e18 - week_end_data['boosted']/1e18) - max_consumed
         decay_remaining = decay_allocation - decay_consumed
 
-    pct_max_consumed = 0 if max_allocation == 0 else max_consumed/max_allocation*100
-    pct_decay_consumed = 0 if decay_allocation == 0 else decay_consumed/decay_allocation*100
+    pct_max_consumed = 0 if max_allocation == 0 else abs(max_consumed/max_allocation*100)
+    pct_decay_consumed = 0 if decay_allocation == 0 else abs(decay_consumed/decay_allocation*100)
     remaining_boost_data = {
         'max_boost_allocation': max_allocation,
         'decay_boost_allocation': decay_allocation,
