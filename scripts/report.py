@@ -86,15 +86,21 @@ def stats():
             start_amt = token_locker.getAccountWeightAt(account, target_week - 1)/52
             end_amt = token_locker.getAccountWeightAt(account, target_week)/52
             w = token_locker.getAccountWeightAt(account, target_week)
+            w_start = token_locker.getAccountWeight(account, block_identifier=start_block)
+            w_gain = max(0, w - w_start)
             total_weight = token_locker.getTotalWeightAt(target_week)
+            total_weight_start = token_locker.getTotalWeight(block_identifier=start_block)
+            total_weight_gain = max(0, total_weight - total_weight_start)
+            
             week_data['week_number'] = target_week
             week_data['peg'] = get_peg(d['pool'], block=end_block)
             week_data['lock_gain'] = end_amt - start_amt
             week_data['current_boost_multiplier'] = get_boost(account, target_week, block=end_block)
-            week_data['global_weight_ratio'] = w / total_weight
+            week_data['global_weight_ratio'] = 0 if total_weight == 0 else w / total_weight
+            adjusted_weight_capture = w_gain / total_weight_gain / week_data['global_weight_ratio']
+            week_data['adjusted_weight_capture'] = adjusted_weight_capture
             week_data['global_weight'] = total_weight
             week_data['weight']= w
-            boost_data = get_maxboost_and_decay(account, target_week, block=start_block)
             # assert False
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
             if (
