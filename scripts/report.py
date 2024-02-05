@@ -28,6 +28,18 @@ TOKEN_INFO = {
 
 def main():
     data = stats()
+    for week in range(len(data["liquid_lockers"]["cvxPrisma"]["weekly_data"])):
+        cvx_weight = data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["weight"]
+        y_weight = data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["weight"]
+        global_weight = data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["global_weight"]
+        
+        # Ensure the global_weight is the same for both, otherwise the calculation would be inconsistent.
+        assert global_weight == data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["global_weight"]
+        
+        liquid_locker_weekly_dominance = (cvx_weight + y_weight) / global_weight
+        data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["liquid_locker_weekly_dominance"] = liquid_locker_weekly_dominance
+        data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["liquid_locker_weekly_dominance"] = liquid_locker_weekly_dominance
+
     data['emissions_schedule'] = emissions_by_week()
     data['distribution_schedule'] = distribution_schedule()
     data['active_fowarders'] = get_active_forwarders()
