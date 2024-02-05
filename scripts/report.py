@@ -142,7 +142,7 @@ def get_remaining_weekly_boost(account, week=current_week):
     if max_allocation != 0:
         pct_max_consumed = int(max_consumed/max_allocation)*100
     if decay_allocation != 0:
-        pct_max_consumed = int(decay_consumed/decay_allocation)*100
+        pct_decay_consumed = int(decay_consumed/decay_allocation)*100
     remaining_boost_data = {
         'max_boost_allocation': max_allocation,
         'decay_boost_allocation': decay_allocation,
@@ -150,7 +150,7 @@ def get_remaining_weekly_boost(account, week=current_week):
         'decay_boost_remaining': decay_remaining,
         'pct_max_consumed': pct_max_consumed,
         # The following will be bugged using the initial calculator. Only week 24+ will return proper amounts.
-        'pct_decay_consumed': pct_max_consumed,
+        'pct_decay_consumed': pct_decay_consumed,
         'max_consumed': int(max_consumed),
         'decay_consume': int(decay_consumed),
     }
