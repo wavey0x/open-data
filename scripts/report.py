@@ -145,9 +145,9 @@ def get_remaining_weekly_boost(account, week=current_week):
         'decay_boost_allocation': decay_allocation,
         'max_boost_remaining': max_remaining,
         'decay_boost_remaining': decay_remaining,
-        'pct_max_consumed': pct_max_consumed,
+        'pct_max_consumed': abs(pct_max_consumed),
         # The following will be bugged using the initial calculator. Only week 24+ will return proper amounts.
-        'pct_decay_consumed': pct_decay_consumed,
+        'pct_decay_consumed': abs(pct_decay_consumed),
         'max_consumed': int(max_consumed),
         'decay_consume': int(decay_consumed),
     }
