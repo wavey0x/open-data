@@ -3,7 +3,8 @@ from brownie import ZERO_ADDRESS, Contract, web3, accounts, chain
 import constants, requests, json
 from datetime import datetime
 
-WEEK = 60 * 60 * 24 * 7
+DAY = 60 * 60 * 24
+WEEK = DAY * 7
 token_locker = Contract(constants.TOKEN_LOCKER)
 
 def get_week_by_ts(ts):
@@ -22,9 +23,9 @@ def get_week_start_ts(week_number=0):
     offset = abs(current_week - week_number)
     current_week_start_ts = int(chain.time() / WEEK) * WEEK
     if week_number <= current_week:
-        return current_week_start_ts - (WEEK * offset)
+        return int(current_week_start_ts - (WEEK * offset))
     else:
-        return current_week_start_ts + (WEEK * offset)
+        return int(current_week_start_ts + (WEEK * offset))
 
 def get_week_end_block(week_number=0):
     current_week = token_locker.getWeek()

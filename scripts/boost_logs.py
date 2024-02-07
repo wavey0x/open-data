@@ -161,27 +161,3 @@ def push_to_gh(project_directory):
 
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
-
-def example():
-    import pandas as pd
-    import duckdb, requests
-
-    # fetch raw txn data from wavey repo and put into dataframe
-    url = 'https://raw.githubusercontent.com/wavey0x/open-data/master/raw_boost_data.json'
-    data = requests.get(url).json()['data']
-    df = pd.DataFrame(data)
-
-    # load data into virtual db
-    con = duckdb.connect(database=':memory:')
-    con.register('boost_data', df)
-
-    # Write any SQL to query the raw data
-    sql = """
-        SELECT txn_hash, account, adjusted_amount, date_str
-        FROM boost_data 
-        WHERE system_week = 24
-        ORDER BY amount DESC 
-        LIMIT 10
-    """
-    results = con.execute(sql).fetchdf()
-    print(results)
