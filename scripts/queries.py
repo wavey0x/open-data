@@ -18,13 +18,20 @@ def query():
     sql = f"""
         SELECT account, boost_delegate, adjusted_amount, fee, date_str
         FROM boost_data 
-        WHERE system_week = 25 AND
-        receiver_ens != 'prisma.cvx.eth' AND
-        boost_delegate_ens = 'prisma.cvx.eth'
+        WHERE system_week > 0 AND (
+            (receiver_ens = 'prisma.cvx.eth' AND
+            boost_delegate_ens != 'prisma.cvx.eth') OR
+            (receiver_ens = 'yprisma.eth' AND
+            boost_delegate_ens != 'yprisma.eth')
+        )
+        
         ORDER BY amount DESC 
     """
     results = con.execute(sql).fetchdf()
     print(results)
+
+    sums = results.select_dtypes(include=['number']).sum()
+    print(sums)
 
 def query_claim_data_pct():
     

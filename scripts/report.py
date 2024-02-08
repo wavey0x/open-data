@@ -92,29 +92,30 @@ def stats():
         for target_week in range(EMISSIONS_START_WEEK, current_week + 1):
             week_data = {}
             print(f'Week: {target_week}')
-            token_locker.getTotalWeightAt(target_week)
             start_block = utils.utils.get_week_start_block(target_week)
             end_block = utils.utils.get_week_end_block(target_week)
             start_amt = token_locker.getAccountWeightAt(account, target_week - 1)/52
             end_amt = token_locker.getAccountWeightAt(account, target_week)/52
-            w = token_locker.getAccountWeightAt(account, target_week)
-            w_start = token_locker.getAccountWeight(account, block_identifier=start_block)
-            w_gain = max(0, w - w_start)
+            account_weight = token_locker.getAccountWeightAt(account, target_week)
+            account_weight_start = token_locker.getAccountWeightAt(account, target_week - 1)
+            account_weight_gain = max(0, account_weight - account_weight_start)
             total_weight = token_locker.getTotalWeightAt(target_week)
-            total_weight_start = token_locker.getTotalWeight(block_identifier=start_block)
+            total_weight_start = token_locker.getTotalWeightAt(target_week - 1)
             total_weight_gain = max(0, total_weight - total_weight_start)
+            global_weight_ratio = 0 if total_weight == 0 else account_weight / total_weight # Gov Share
+            adjusted_weight_capture = account_weight_gain / total_weight_gain / global_weight_ratio
             
             week_data['week_number'] = target_week
             week_data['peg'] = get_peg(d['pool'], block=end_block)
             week_data['lock_gain'] = end_amt - start_amt
             week_data['current_boost_multiplier'] = get_boost(account, target_week, block=end_block)
-            week_data['global_weight_ratio'] = 0 if total_weight == 0 else w / total_weight
-            adjusted_weight_capture = w_gain / total_weight_gain / week_data['global_weight_ratio']
+            week_data['global_weight_ratio'] = global_weight_ratio
             week_data['adjusted_weight_capture'] = adjusted_weight_capture
             week_data['global_weight'] = total_weight
-            week_data['weight']= w
-            # assert False
+            week_data['weight']= account_weight
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
+            
+            # Here we do some work to pull older data from cache, rather than query it.
             if (
                 target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
                 len(boost_fees_cache) == 0 
@@ -124,6 +125,7 @@ def stats():
             else:
                 week_data['boost_fees_collected'] = boost_fees_cache[target_week]
             weekly_data.append(week_data)
+
         data['liquid_lockers'][l]['weekly_data'] = weekly_data
         
         
@@ -231,7 +233,9 @@ def get_maxboost_and_decay(user, week, block=height):
     return calculator.getClaimableWithBoost(user, account_weekly_earned, total_weekly).dict()
 
 def get_account_weekly_earned(user, week, block=height):
-    # compute accountWeeklyEarned storage key
+    # Data we need is in the contract at the `accountWeeklyEarned` mapping
+    # But since that variable is not public, we need to fetch directly from storage slot
+    # Below we compute accountWeeklyEarned storage key
     key = web3.keccak(
         hexstr="00" * 12
         + user[2:]
