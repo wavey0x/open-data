@@ -1,8 +1,11 @@
-from brownie import interface, chain, web3
+from brownie import Contract, chain, web3
 import pandas as pd
 import duckdb
 import requests
 import utils
+from constants import VAULT
+
+vault = Contract(VAULT)
 
 def query():
     # fetch raw txn data from wavey repo and put into dataframe
@@ -15,30 +18,48 @@ def query():
     con.register('boost_data', df)
 
     # Write any SQL to query the raw data
+
     sql = f"""
         SELECT account, boost_delegate, adjusted_amount, fee, date_str
         FROM boost_data 
-        WHERE system_week > 0 AND (
-            (receiver_ens = 'prisma.cvx.eth' AND
-            boost_delegate_ens != 'prisma.cvx.eth') OR
-            (receiver_ens = 'yprisma.eth' AND
-            boost_delegate_ens != 'yprisma.eth')
-        )
-        
-        ORDER BY amount DESC 
+        WHERE
+                (receiver_ens = 'prisma.cvx.eth' AND
+                boost_delegate_ens != 'prisma.cvx.eth') OR
+                (receiver_ens = 'yprisma.eth' AND
+                boost_delegate_ens != 'yprisma.eth')
+        ORDER BY block DESC 
     """
+    # sql = f"""
+    #     SELECT account, boost_delegate, adjusted_amount, fee, date_str
+    #     FROM boost_data 
+    #     WHERE
+    #         system_week = 26 AND
+    #             (receiver_ens = 'prisma.cvx.eth' OR
+    #             boost_delegate_ens = 'prisma.cvx.eth')
+        
+    #     ORDER BY block DESC 
+    # """
+    # sql = f"""
+    #     SELECT txn_hash, account, boost_delegate, receiver
+    #     FROM boost_data 
+    #     WHERE account = boost_delegate
+        
+    #     ORDER BY block DESC 
+    # """
     results = con.execute(sql).fetchdf()
     print(results)
 
     sums = results.select_dtypes(include=['number']).sum()
     print(sums)
 
+    assert False
+
 def query_claim_data_pct():
     
     WEEK = utils.utils.WEEK  # Assuming this is the duration of a week in seconds
     DAY = utils.utils.DAY  # Assuming this is the duration of a day in seconds
 
-    weeks = [{'week_number': i, 'start_ts': utils.utils.get_week_start_ts(week_number=i)} for i in range(12, 26)]
+    weeks = [{'week_number': i, 'start_ts': utils.utils.get_week_start_ts(week_number=i)} for i in range(12, vault.getWeek()+1)]
 
     sql_queries = []
 

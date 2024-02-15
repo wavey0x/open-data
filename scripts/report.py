@@ -103,7 +103,7 @@ def stats():
             total_weight_start = token_locker.getTotalWeightAt(target_week - 1)
             total_weight_gain = max(0, total_weight - total_weight_start)
             global_weight_ratio = 0 if total_weight == 0 else account_weight / total_weight # Gov Share
-            adjusted_weight_capture = account_weight_gain / total_weight_gain / global_weight_ratio
+            adjusted_weight_capture = 0 if total_weight_gain == 0 else account_weight_gain / total_weight_gain / global_weight_ratio
             
             week_data['week_number'] = target_week
             week_data['peg'] = get_peg(d['pool'], block=end_block)
