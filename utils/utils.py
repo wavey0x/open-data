@@ -100,6 +100,44 @@ def get_ens_from_cache(address):
         return ens_data[address]
     return ''
 
+def contract_creation_block(address):
+    """
+    Find contract creation block using binary search.
+    NOTE Requires access to historical state. Doesn't account for CREATE2 or SELFDESTRUCT.
+    """
+    lo = 0
+    hi = end = chain.height
+
+    while hi - lo > 1:
+        mid = lo + (hi - lo) // 2
+        code = web3.eth.get_code(address, block_identifier=mid)
+        if code:
+            hi = mid
+        else:
+            lo = mid
+
+
+    return hi if hi != end else None
+
+def get_logs_chunked(contract, event_name, start_block=0, end_block=0):
+    try:
+        event = getattr(contract.events, event_name)
+    except Exception as e:
+        print(f'Contract has no event by the name {event_name}', e)
+
+    if start_block == 0:
+        start_block = contract_creation_block(contract.address)
+    if end_block == 0:
+        end_block = chain.height
+    
+    MAX_RANGE = 100_000
+    logs = []
+    while start_block < end_block:
+        logs += event.getLogs(fromBlock=start_block, toBlock=min(end_block, start_block + MAX_RANGE))
+        start_block += MAX_RANGE
+
+    return logs
+
 def cache_ens():
     ens_data = load_from_json('ens_cache.json')
     if ens_data is None:

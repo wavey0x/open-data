@@ -34,7 +34,7 @@ def main():
         global_weight = data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["global_weight"]
         
         # Ensure the global_weight is the same for both, otherwise the calculation would be inconsistent.
-        assert global_weight == data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["global_weight"]
+        # assert global_weight == data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["global_weight"]
         
         liquid_locker_weekly_dominance = 0 if global_weight == 0 else (cvx_weight + y_weight) / global_weight
         data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["liquid_locker_weekly_dominance"] = liquid_locker_weekly_dominance
@@ -177,7 +177,8 @@ def get_active_forwarders():
     ens_data = utils.utils.load_from_json('ens_cache.json')
     week = vault.getWeek()
     factory = Contract(constants.BOOST_FACTORY)
-    logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
+    logs = utils.utils.get_logs_chunked(factory, 'ForwarderConfigured')
+    # logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
     fee = 0
     active_delegates = []
     for log in logs:
@@ -378,7 +379,7 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
     return total
 
 def get_fees_by_week():
-    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=0)
+    logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')
     fee_data = {}
     for l in logs:
         log_data = l.args

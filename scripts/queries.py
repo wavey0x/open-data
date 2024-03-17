@@ -29,6 +29,16 @@ def query():
                 boost_delegate_ens != 'yprisma.eth')
         ORDER BY block DESC 
     """
+
+    sql = f"""
+        SELECT adjusted_amount, txn_hash
+        FROM boost_data 
+        WHERE
+            system_week = 30 AND
+            adjusted_amount > 100000
+        ORDER BY block DESC 
+    """
+
     # sql = f"""
     #     SELECT account, boost_delegate, adjusted_amount, fee, date_str
     #     FROM boost_data 
@@ -48,9 +58,10 @@ def query():
     # """
     results = con.execute(sql).fetchdf()
     print(results)
+    print(results.iloc[0, 1])
 
-    sums = results.select_dtypes(include=['number']).sum()
-    print(sums)
+    # sums = results.select_dtypes(include=['number']).sum()
+    # print(sums)
 
     assert False
 
