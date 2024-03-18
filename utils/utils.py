@@ -2,6 +2,8 @@ import constants
 from brownie import ZERO_ADDRESS, Contract, web3, accounts, chain
 import constants, requests, json
 from datetime import datetime
+from functools import lru_cache
+from utils.cache import memory
 
 DAY = 60 * 60 * 24
 WEEK = DAY * 7
@@ -14,10 +16,12 @@ def get_week_by_ts(ts):
     diff = ts - first_week
     return diff // WEEK
 
+@memory.cache()
 def get_week_start_block(week_number=0):
     ts = get_week_start_ts(week_number)
     return closest_block_after_timestamp(ts)
 
+@memory.cache()
 def get_week_start_ts(week_number=0):
     current_week = token_locker.getWeek()
     offset = abs(current_week - week_number)
@@ -27,6 +31,7 @@ def get_week_start_ts(week_number=0):
     else:
         return int(current_week_start_ts + (WEEK * offset))
 
+@memory.cache()
 def get_week_end_block(week_number=0):
     current_week = token_locker.getWeek()
     if week_number == current_week:
@@ -34,6 +39,7 @@ def get_week_end_block(week_number=0):
     ts = get_week_start_ts(week_number) + WEEK
     return closest_block_after_timestamp(ts) - 1
 
+@memory.cache()
 def get_week_end_ts(week_number=0):
     """
         This will always be precise. Never returns chain.time()
@@ -61,6 +67,7 @@ def closest_block_after_timestamp(timestamp: int) -> int:
 
     return hi
 
+@memory.cache()
 def closest_block_before_timestamp(timestamp: int) -> int:
     return closest_block_after_timestamp(timestamp) - 1
 
@@ -85,6 +92,7 @@ def get_prices(tokens=[]):
         prices[t] = response[t]['price']
     return prices
 
+@memory.cache()
 def get_token_logo_urls(token_address):
     url = 'https://raw.githubusercontent.com/SmolDapp/tokenLists/main/lists/coingecko.json'
     data = requests.get(url).json()
@@ -100,6 +108,7 @@ def get_ens_from_cache(address):
         return ens_data[address]
     return ''
 
+@memory.cache()
 def contract_creation_block(address):
     """
     Find contract creation block using binary search.
