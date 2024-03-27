@@ -128,7 +128,7 @@ def contract_creation_block(address):
 
     return hi if hi != end else None
 
-def get_logs_chunked(contract, event_name, start_block=0, end_block=0):
+def get_logs_chunked(contract, event_name, start_block=0, end_block=0, chunk_size=100_000):
     try:
         event = getattr(contract.events, event_name)
     except Exception as e:
@@ -138,12 +138,11 @@ def get_logs_chunked(contract, event_name, start_block=0, end_block=0):
         start_block = contract_creation_block(contract.address)
     if end_block == 0:
         end_block = chain.height
-    
-    MAX_RANGE = 100_000
+
     logs = []
     while start_block < end_block:
-        logs += event.getLogs(fromBlock=start_block, toBlock=min(end_block, start_block + MAX_RANGE))
-        start_block += MAX_RANGE
+        logs += event.getLogs(fromBlock=start_block, toBlock=min(end_block, start_block + chunk_size))
+        start_block += chunk_size
 
     return logs
 

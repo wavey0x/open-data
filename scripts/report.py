@@ -18,12 +18,24 @@ prisma_fee_distributor = Contract(constants.PRISMA_FEE_DISTRIBUTOR)
 current_week = vault.getWeek()
 
 TOKEN_INFO = {
+    '0xdA47862a83dac0c112BA89c6abC2159b95afd71C': {
+        'symbol':'PRISMA',
+        'decimals':'18',
+        'price': utils.utils.get_prices(['0xdA47862a83dac0c112BA89c6abC2159b95afd71C'])['0xdA47862a83dac0c112BA89c6abC2159b95afd71C'],
+        'token_logo_url': 'https://assets.coingecko.com/coins/images/31520/small/PRISMA_200.png?1696530330'
+    },
     '0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28': {
         'symbol':'mkUSD',
         'decimals':'18',
         'price': utils.utils.get_prices(['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'])['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'],
         'token_logo_url': 'https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png'
-    }
+    },
+    '0x35282d87011f87508D457F08252Bc5bFa52E10A0': {
+        'symbol':'ULTRA',
+        'decimals':'18',
+        'price': utils.utils.get_prices(['0x35282d87011f87508D457F08252Bc5bFa52E10A0'])['0x35282d87011f87508D457F08252Bc5bFa52E10A0'],
+        'token_logo_url': 'https://assets.coingecko.com/coins/images/35315/standard/ultra-logo.png?1708161054'
+    },
 }
 
 def main():
@@ -43,6 +55,7 @@ def main():
     data['emissions_schedule'] = emissions_by_week()
     data['distribution_schedule'] = distribution_schedule()
     data['active_fowarders'] = get_active_forwarders()
+    data['token_info'] = TOKEN_INFO
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
@@ -177,8 +190,8 @@ def get_active_forwarders():
     ens_data = utils.utils.load_from_json('ens_cache.json')
     week = vault.getWeek()
     factory = Contract(constants.BOOST_FACTORY)
-    logs = utils.utils.get_logs_chunked(factory, 'ForwarderConfigured')
-    # logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
+    # logs = utils.utils.get_logs_chunked(factory, 'ForwarderConfigured')
+    logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
     fee = 0
     active_delegates = []
     for log in logs:
@@ -379,7 +392,8 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
     return total
 
 def get_fees_by_week():
-    logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')
+    # logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')
+    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=0)
     fee_data = {}
     for l in logs:
         log_data = l.args

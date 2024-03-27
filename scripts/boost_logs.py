@@ -52,7 +52,7 @@ def get_logs():
             json.dump(data, file, indent=2)
             file.truncate()
 
-        print(f'Processed {len(events)} events. Loop took {time.time() - overall_start_time} seconds.')
+        print(f'Found {len(events)} events. Loop took {time.time() - overall_start_time} seconds.')
 
     print(f'Total execution time: {time.time() - overall_start_time} seconds.')
 

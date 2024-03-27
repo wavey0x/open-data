@@ -20,7 +20,7 @@ def query():
     # Write any SQL to query the raw data
 
     sql = f"""
-        SELECT account, boost_delegate, adjusted_amount, fee, date_str
+        SELECT account, boost_delegate, adjusted_amount as amt, fee, date_str
         FROM boost_data 
         WHERE
                 (receiver_ens = 'prisma.cvx.eth' AND
@@ -31,12 +31,12 @@ def query():
     """
 
     sql = f"""
-        SELECT adjusted_amount, txn_hash
+        SELECT account, boost_delegate_ens, adjusted_amount, fee, date_str
         FROM boost_data 
         WHERE
-            system_week = 30 AND
-            adjusted_amount > 100000
-        ORDER BY block DESC 
+            system_week > 28 AND
+            adjusted_amount > 40000
+        ORDER BY adjusted_amount desc
     """
 
     # sql = f"""
