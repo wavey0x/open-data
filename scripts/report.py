@@ -55,7 +55,12 @@ def main():
     data['emissions_schedule'] = emissions_by_week()
     data['distribution_schedule'] = distribution_schedule()
     data['active_fowarders'] = get_active_forwarders()
+    for key in TOKEN_INFO:
+        token = Contract(key)
+        supply = token.totalSupply() / 10 ** int(TOKEN_INFO[key]['decimals'])
+        TOKEN_INFO[key]['total_supply'] = supply
     data['token_info'] = TOKEN_INFO
+
     json_filename = os.getenv('JSON_FILE')
     project_directory = os.getenv('TARGET_PROJECT_DIRECTORY')
     write_data_as_json(data, project_directory, json_filename)
