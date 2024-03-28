@@ -35,7 +35,7 @@ def get_week_start_ts(week_number=0):
 def get_week_end_block(week_number=0):
     current_week = token_locker.getWeek()
     if week_number == current_week:
-        return chain.height
+        return chain.height - 1
     ts = get_week_start_ts(week_number) + WEEK
     return closest_block_after_timestamp(ts) - 1
 

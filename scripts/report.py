@@ -52,8 +52,11 @@ def main():
         data["liquid_lockers"]["cvxPrisma"]["weekly_data"][week]["liquid_locker_weekly_dominance"] = liquid_locker_weekly_dominance
         data["liquid_lockers"]["yPRISMA"]["weekly_data"][week]["liquid_locker_weekly_dominance"] = liquid_locker_weekly_dominance
 
+    print('fetching emissions schedule...')
     data['emissions_schedule'] = emissions_by_week()
+    print('fetching distribution schedule...')
     data['distribution_schedule'] = distribution_schedule()
+    print('fetching boost delegate data...')
     data['active_fowarders'] = get_active_forwarders()
     for key in TOKEN_INFO:
         token = Contract(key)
@@ -196,13 +199,14 @@ def get_active_forwarders():
     week = vault.getWeek()
     factory = Contract(constants.BOOST_FACTORY)
     # logs = utils.utils.get_logs_chunked(factory, 'ForwarderConfigured')
-    logs = factory.events.ForwarderConfigured.getLogs(fromBlock=0)
+    creation_block = utils.utils.contract_creation_block(factory.address)
+    logs = factory.events.ForwarderConfigured.getLogs(fromBlock=creation_block)
     fee = 0
     active_delegates = []
     for log in logs:
         d = log.args['boostDelegate']
         # fwd = Contract(factory.forwarder(d))
-        if factory.isForwarderActive(d) and d not in active_delegates:
+        if d not in active_delegates and factory.isForwarderActive(d):
             active_delegates.append(d)
 
     active_delegate_list = []
@@ -396,9 +400,10 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
         block += resolution
     return total
 
-def get_fees_by_week():
+def xget_fee_distributions():
     # logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')
-    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=0)
+    creation_block = utils.utils.contract_creation_block(prisma_fee_distributor.address)
+    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=creation_block)
     fee_data = {}
     for l in logs:
         log_data = l.args
@@ -423,9 +428,55 @@ def get_fees_by_week():
         )
     return fee_data
 
+def get_fee_distributions():
+    """
+    Returns a dict with keys system_week and values array of distribution dicts
+    """
+    # logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')
+    current_week = prisma_fee_distributor.getWeek()
+    cache_data = get_last_run_data()
+    buffer = 3
+    target_week = cache_data['emissions_schedule'][-buffer]['system_week']
+    cache_data = cache_data['emissions_schedule'][:-buffer]
+    new_dict = {}
+    for item in cache_data:
+        system_week = item["system_week"]
+        distros = item["protocol_fee_distribution"]["distros"]
+        if system_week in new_dict:
+            new_dict[system_week].extend(distros)
+        else:
+            new_dict[system_week] = distros
+    fee_data = new_dict
+    start_block = utils.utils.get_week_start_block(target_week-1)
+    # creation_block = utils.utils.contract_creation_block(prisma_fee_distributor.address)
+    logs = prisma_fee_distributor.events.FeesReceived.getLogs(fromBlock=start_block-1)
+    for l in logs:
+        log_data = l.args
+        week = log_data.week + 1 # Become claimable in following week
+        if week not in fee_data:
+            fee_data[week] = []
+        amount = log_data.amount / 10 ** Contract(log_data.token).decimals()
+        value = 0
+        try:
+            value = TOKEN_INFO[log_data.token]['price'] * amount
+        except:
+            value = 0
+
+        fee_data[week].append(
+            {
+                'token':log_data.token,
+                'amount': amount,
+                'value': value,
+                'token_price': TOKEN_INFO[log_data.token]['price'],
+                'token_logo_url': TOKEN_INFO[log_data.token]['token_logo_url'],
+                'symbol': TOKEN_INFO[log_data.token]['symbol']
+            }
+        )
+    return fee_data
+
 def emissions_by_week():
     MAX_PCT = 10_000
-    fee_distro_by_week = get_fees_by_week()
+    fee_distro_by_week = get_fee_distributions()
     current_week = vault.getWeek()
     emissions_week = 0
     weeks = []
