@@ -28,13 +28,13 @@ TOKEN_INFO = {
         'symbol':'mkUSD',
         'decimals':'18',
         'price': utils.utils.get_prices(['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'])['0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'],
-        'token_logo_url': 'https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-32.png'
+        'token_logo_url': 'https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png'
     },
     '0x35282d87011f87508D457F08252Bc5bFa52E10A0': {
         'symbol':'ULTRA',
         'decimals':'18',
         'price': utils.utils.get_prices(['0x35282d87011f87508D457F08252Bc5bFa52E10A0'])['0x35282d87011f87508D457F08252Bc5bFa52E10A0'],
-        'token_logo_url': 'https://assets.coingecko.com/coins/images/35315/standard/ultra-logo.png?1708161054'
+        'token_logo_url': 'https://assets.coingecko.com/coins/images/35315/standard/ultra-logo.png'
     },
 }
 
