@@ -20,7 +20,7 @@ def query():
     # Write any SQL to query the raw data
 
     sql = f"""
-        SELECT account, boost_delegate, adjusted_amount as amt, fee, date_str
+        SELECT account, boost_delegate, adjusted_amount as amt, fee
         FROM boost_data 
         WHERE
                 (receiver_ens = 'prisma.cvx.eth' AND
@@ -31,11 +31,11 @@ def query():
     """
 
     sql = f"""
-        SELECT account, boost_delegate_ens, adjusted_amount, fee, date_str
+        SELECT txn_hash, boost_delegate_ens, adjusted_amount, fee, date_str
         FROM boost_data 
         WHERE
-            system_week > 28 AND
-            adjusted_amount > 40000
+            system_week >= 33 AND
+            adjusted_amount > 10000
         ORDER BY adjusted_amount desc
     """
 
@@ -57,6 +57,7 @@ def query():
     #     ORDER BY block DESC 
     # """
     results = con.execute(sql).fetchdf()
+    pd.set_option('display.max_colwidth', None)
     print(results)
     print(results.iloc[0, 1])
 

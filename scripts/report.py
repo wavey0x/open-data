@@ -379,7 +379,7 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
     start_block = 18501009 if start_block == 0 else start_block
     target_block = chain.height if end_block == 0 else end_block
     block = start_block
-    resolution = 500
+    resolution = 100
     total = 0
     last = vault.claimableBoostDelegationFees(
         account, 
