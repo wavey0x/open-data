@@ -180,3 +180,19 @@ def load_from_json(file_path):
 def cache_to_json(file_path, data_dict):
     with open(file_path, 'w') as file:
         json.dump(data_dict, file, indent=4)
+
+def sql_query_boost_data(sql):
+    import pandas as pd
+    import duckdb
+    import requests
+    url = 'https://raw.githubusercontent.com/wavey0x/open-data/master/raw_boost_data.json'
+    data = requests.get(url).json()['data']
+    df = pd.DataFrame(data)
+
+    # load data into virtual db
+    con = duckdb.connect(database=':memory:')
+    con.register('boost_data', df)
+
+    results = con.execute(sql).fetchdf()
+    pd.set_option('display.max_colwidth', None)
+    return results

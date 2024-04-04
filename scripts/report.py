@@ -136,15 +136,22 @@ def stats():
             week_data['weight']= account_weight
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
             
-            # Here we do some work to pull older data from cache, rather than query it.
-            if (
-                target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
-                len(boost_fees_cache) == 0 
-                or not target_week in boost_fees_cache
-            ):
-                week_data['boost_fees_collected'] = get_boost_delegation_fees(account, start_block=start_block, end_block=end_block)
-            else:
-                week_data['boost_fees_collected'] = boost_fees_cache[target_week]
+            # # Here we do some work to pull older data from cache, rather than query it.
+            # if (
+            #     target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
+            #     len(boost_fees_cache) == 0 
+            #     or not target_week in boost_fees_cache
+            # ):
+            #     week_data['boost_fees_collected'] = get_boost_delegation_fees(account, start_block=start_block, end_block=end_block)
+            # else:
+            #     week_data['boost_fees_collected'] = boost_fees_cache[target_week]
+
+            # week_data['boost_fees_collected'] = get_boost_delegation_fees(account, target_week)
+
+            df = get_boost_delegation_fees(account, target_week)
+            earned_fees = df['earned_fees'].iloc[0] if not df.empty else 0
+            print(earned_fees)
+            week_data['boost_fees_collected'] = earned_fees
             weekly_data.append(week_data)
 
         data['liquid_lockers'][l]['weekly_data'] = weekly_data
@@ -379,7 +386,7 @@ def cvxprisma_lp_apr(block=chain.height):
 
     return reward_apr
 
-def get_boost_delegation_fees(account, start_block=0, end_block=0):
+def get_boost_delegation_fees_old(account, start_block=0, end_block=0):
     start_block = 18501009 if start_block == 0 else start_block
     target_block = chain.height if end_block == 0 else end_block
     block = start_block
@@ -399,6 +406,21 @@ def get_boost_delegation_fees(account, start_block=0, end_block=0):
         last = claimable
         block += resolution
     return total
+
+def get_boost_delegation_fees(account, week):
+    sql = f"""
+        SELECT 
+            boost_delegate, 
+            SUM(fee) AS earned_fees 
+        FROM
+            boost_data
+        WHERE
+            boost_delegate = '{account}' AND
+            system_week = {week}
+        GROUP BY 
+            boost_delegate
+    """
+    return utils.utils.sql_query_boost_data(sql)
 
 def xget_fee_distributions():
     # logs = utils.utils.get_logs_chunked(prisma_fee_distributor, 'FeesReceived')

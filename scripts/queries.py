@@ -39,6 +39,21 @@ def query():
         ORDER BY adjusted_amount desc
     """
 
+    sql = f"""
+        SELECT 
+            boost_delegate, boost_delegate_ens as ens, 
+            SUM(fee) AS earned_fees 
+        FROM
+            boost_data
+        WHERE
+            boost_delegate_ens = 'yprisma.eth' OR
+            boost_delegate_ens = 'prisma.cvx.eth'
+        GROUP BY 
+            boost_delegate, boost_delegate_ens 
+        ORDER BY 
+            earned_fees DESC, boost_delegate
+    """
+
     # sql = f"""
     #     SELECT account, boost_delegate, adjusted_amount, fee, date_str
     #     FROM boost_data 
