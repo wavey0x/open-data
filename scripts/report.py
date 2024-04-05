@@ -136,22 +136,18 @@ def stats():
             week_data['weight']= account_weight
             week_data['remaining_boost_data'] = get_remaining_weekly_boost(account, target_week)
             
-            # # Here we do some work to pull older data from cache, rather than query it.
-            # if (
-            #     target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
-            #     len(boost_fees_cache) == 0 
-            #     or not target_week in boost_fees_cache
-            # ):
-            #     week_data['boost_fees_collected'] = get_boost_delegation_fees(account, start_block=start_block, end_block=end_block)
-            # else:
-            #     week_data['boost_fees_collected'] = boost_fees_cache[target_week]
+            # Here we do some work to pull older data from cache, rather than query it.
+            if (
+                target_week in [current_week, current_week - 1] or # We want to refresh last two weeks in case of overwrite.
+                len(boost_fees_cache) == 0 
+                or not target_week in boost_fees_cache
+            ):
+                df = get_boost_delegation_fees(account, target_week)
+                earned_fees = df['earned_fees'].iloc[0] if not df.empty else 0
+                week_data['boost_fees_collected'] = earned_fees
+            else:
+                week_data['boost_fees_collected'] = boost_fees_cache[target_week]
 
-            # week_data['boost_fees_collected'] = get_boost_delegation_fees(account, target_week)
-
-            df = get_boost_delegation_fees(account, target_week)
-            earned_fees = df['earned_fees'].iloc[0] if not df.empty else 0
-            print(earned_fees)
-            week_data['boost_fees_collected'] = earned_fees
             weekly_data.append(week_data)
 
         data['liquid_lockers'][l]['weekly_data'] = weekly_data
@@ -284,9 +280,9 @@ def get_peg(pool, amt=100, block=chain.height):
     pool = Contract(pool)
     try:
         price = pool.price_oracle(block_identifier=block) / 1e18
-        out = pool.get_dy(1, 0, amt*1e18, block_identifier=block) / 1e18
+        out = pool.get_dy(1, 0, amt*1e18, block_identifier=block) / 1e18 / 100
     except:
-        return 0
+        price = 0
     return price
 
 def cvxprisma_staking_apr(block=chain.height):
@@ -458,8 +454,9 @@ def get_fee_distributions():
     current_week = prisma_fee_distributor.getWeek()
     cache_data = get_last_run_data()
     buffer = 3
-    target_week = cache_data['emissions_schedule'][-buffer]['system_week']
-    cache_data = cache_data['emissions_schedule'][:-buffer]
+    if 'emissions_schedule' in cache_data:
+        target_week = cache_data['emissions_schedule'][-buffer]['system_week']
+        cache_data = cache_data['emissions_schedule'][:-buffer]
     new_dict = {}
     for item in cache_data:
         system_week = item["system_week"]
