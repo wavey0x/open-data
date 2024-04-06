@@ -31,11 +31,14 @@ def get_week_start_ts(week_number=0):
     else:
         return int(current_week_start_ts + (WEEK * offset))
 
-@memory.cache()
 def get_week_end_block(week_number=0):
     current_week = token_locker.getWeek()
     if week_number == current_week:
         return chain.height - 1
+    return get_past_week_end_block(week_number)
+
+@memory.cache()
+def get_past_week_end_block(week_number=0):
     ts = get_week_start_ts(week_number) + WEEK
     return closest_block_after_timestamp(ts) - 1
 

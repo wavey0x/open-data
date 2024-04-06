@@ -114,7 +114,7 @@ def stats():
             week_data = {}
             print(f'Week: {target_week}')
             start_block = utils.utils.get_week_start_block(target_week)
-            end_block = utils.utils.get_week_end_block(target_week)
+            end_block = utils.utils.get_week_end_block(week_number=target_week)
             start_amt = token_locker.getAccountWeightAt(account, target_week - 1)/52
             end_amt = token_locker.getAccountWeightAt(account, target_week)/52
             account_weight = token_locker.getAccountWeightAt(account, target_week)
