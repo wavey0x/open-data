@@ -15,6 +15,7 @@ vault = Contract(constants.VAULT)
 emissions_schedule = Contract(constants.EMISSIONS_SCHEDULE)
 token_locker = Contract(constants.TOKEN_LOCKER)
 prisma_fee_distributor = Contract(constants.PRISMA_FEE_DISTRIBUTOR)
+ybs_registry = Contract(constants.YBS_REGISTRY)
 current_week = vault.getWeek()
 
 TOKEN_INFO = {
@@ -319,10 +320,7 @@ def cvxprisma_staking_apr(block=chain.height):
 def yprisma_staking_apr(block=chain.height):
     staker = Contract('0xE3EE395C9067dD15C492Ca950B101a7d6c85b5Fc')
     mkusd = '0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'
-
-    staking_token = staker.stakingToken()
-    supply = staker.totalSupply()
-
+    staking_token = constants.YPRISMA
 
     # Query DefiLlama for all of our coin prices
     coins = ','.join(f'ethereum:{k}' for k in [mkusd, staking_token])
@@ -331,8 +329,16 @@ def yprisma_staking_apr(block=chain.height):
     response = {key.replace('ethereum:', ''): value for key, value in response.items()}
     price_staking_token = response[staking_token]['price']
     price_reward_token = response[mkusd]['price']
-    reward_apr = staker.rewardRate() / 1e18 * price_reward_token * YEAR / (price_staking_token * supply / 1e18)
-    return reward_apr
+
+    deployment = ybs_registry.deployments(constants.YPRISMA)
+    utils = Contract(deployment['utilities'])
+
+    global_projected_apr = utils.getGlobalProjectedApr(price_staking_token, price_reward_token) / 1e18
+    global_active_apr = utils.getGlobalActiveApr(price_staking_token, price_reward_token) / 1e18
+
+    apr = global_projected_apr if global_projected_apr != 0 else global_active_apr
+
+    return apr
 
 def yprisma_lp_apr(block=chain.height):
     receiver = Contract('0xb8Fa880840a64c25318989B907cCb58FD7A324Df')
