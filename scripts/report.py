@@ -318,7 +318,7 @@ def cvxprisma_staking_apr(block=chain.height):
     return apr
 
 def yprisma_staking_apr(block=chain.height):
-    staker = Contract('0xE3EE395C9067dD15C492Ca950B101a7d6c85b5Fc')
+    # staker = Contract('0xE3EE395C9067dD15C492Ca950B101a7d6c85b5Fc')
     mkusd = '0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28'
     staking_token = constants.YPRISMA
 
@@ -333,12 +333,10 @@ def yprisma_staking_apr(block=chain.height):
     deployment = ybs_registry.deployments(constants.YPRISMA)
     utils = Contract(deployment['utilities'])
 
-    global_projected_apr = utils.getGlobalProjectedApr(price_staking_token, price_reward_token) / 1e18
-    global_active_apr = utils.getGlobalActiveApr(price_staking_token, price_reward_token) / 1e18
+    global_projected_apr = utils.getGlobalProjectedApr(price_staking_token*1e18, price_reward_token*1e18) / 1e18
+    global_active_apr = utils.getGlobalActiveApr(price_staking_token*1e18, price_reward_token*1e18) / 1e18
 
-    apr = global_projected_apr if global_projected_apr != 0 else global_active_apr
-
-    return apr
+    return global_projected_apr if global_projected_apr != 0 else global_active_apr
 
 def yprisma_lp_apr(block=chain.height):
     receiver = Contract('0xb8Fa880840a64c25318989B907cCb58FD7A324Df')
