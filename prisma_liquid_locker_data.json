@@ -1,6 +1,6 @@
 {
     "prisma_week": 45,
-    "updated_at": 1719240602,
+    "updated_at": 1719241202,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -736,13 +736,13 @@
                 },
                 {
                     "week_number": 45,
-                    "peg": 0.9681027989242795,
-                    "lock_gain": 555123.0,
+                    "peg": 0.9678716631417769,
+                    "lock_gain": 555427.0,
                     "current_boost_multiplier": 2.0,
-                    "global_weight_ratio": 0.529322087840069,
-                    "adjusted_weight_capture": 1.1552196405989537,
-                    "global_weight": 3127622818,
-                    "weight": 1655519840,
+                    "global_weight_ratio": 0.5293244667838426,
+                    "adjusted_weight_capture": 1.1554601521642986,
+                    "global_weight": 3127638626,
+                    "weight": 1655535648,
                     "remaining_boost_data": {
                         "max_boost_allocation": 479155.9607745326,
                         "decay_boost_allocation": 798593.2679575544,
@@ -754,11 +754,11 @@
                         "decay_consume": 0
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.7934389612833423
+                    "liquid_locker_weekly_dominance": 0.7934400053032213
                 }
             ],
-            "current_staking_apr": 1.7221798675214868,
-            "current_lp_apr": 1.3879319527825562
+            "current_staking_apr": 1.7282040970336527,
+            "current_lp_apr": 1.3925281969050756
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -1494,12 +1494,12 @@
                 },
                 {
                     "week_number": 45,
-                    "peg": 0.9439356131374538,
+                    "peg": 0.9439377717145153,
                     "lock_gain": 294692.0,
                     "current_boost_multiplier": 1.881512572,
-                    "global_weight_ratio": 0.26411687344327334,
-                    "adjusted_weight_capture": 1.2290443594689315,
-                    "global_weight": 3127622818,
+                    "global_weight_ratio": 0.2641155385193788,
+                    "adjusted_weight_capture": 1.228639143974626,
+                    "global_weight": 3127638626,
                     "weight": 826057960,
                     "remaining_boost_data": {
                         "max_boost_allocation": 238814.24696049534,
@@ -1512,11 +1512,11 @@
                         "decay_consume": 47159
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.7934389612833423
+                    "liquid_locker_weekly_dominance": 0.7934400053032213
                 }
             ],
-            "current_staking_apr": 2.197687335982039,
-            "current_lp_apr": 1.3468607254427722
+            "current_staking_apr": 2.2060796573370784,
+            "current_lp_apr": 1.346860725442772
         }
     },
     "emissions_schedule": [
@@ -2328,13 +2328,13 @@
             "system_week": 44,
             "net_emissions_returned": 9503.183080276242,
             "protocol_fee_distribution": {
-                "total_value": 78218.72025,
+                "total_value": 78168.31825,
                 "distros": [
                     {
                         "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
                         "amount": 79750.0,
-                        "value": 78218.72025,
-                        "token_price": 0.980799,
+                        "value": 78168.31825,
+                        "token_price": 0.980167,
                         "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
                         "symbol": "mkUSD"
                     }
@@ -2353,15 +2353,15 @@
             "allocated_emissions": 1209845.5075279232,
             "emissions_week": 34,
             "system_week": 45,
-            "net_emissions_returned": 4118.405352687463,
+            "net_emissions_returned": 4119.679896121845,
             "protocol_fee_distribution": {
-                "total_value": 78218.72025,
+                "total_value": 78168.31825,
                 "distros": [
                     {
                         "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
                         "amount": 79750.0,
-                        "value": 78218.72025,
-                        "token_price": 0.980799,
+                        "value": 78168.31825,
+                        "token_price": 0.980167,
                         "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
                         "symbol": "mkUSD"
                     }
@@ -2379,16 +2379,16 @@
             "projected": true,
             "emissions_week": 35,
             "system_week": 46,
-            "allocated_emissions": 1198993.9636083462,
+            "allocated_emissions": 1198993.9750792368,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
-                "total_value": 70209.34441101202,
+                "total_value": 70164.10343333182,
                 "distros": [
                     {
                         "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
                         "amount": 71583.82544334978,
-                        "value": 70209.34441101202,
-                        "token_price": 0.980799,
+                        "value": 70164.10343333182,
+                        "token_price": 0.980167,
                         "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
                         "symbol": "mkUSD"
                     }
@@ -2502,7 +2502,7 @@
             "pct_decay_consumed": 0.0,
             "max_consumed": 0,
             "decay_consume": 0,
-            "fee": 1111,
+            "fee": 1108,
             "boost_delegate": "0x62bd0DeC5A8733A0590891f97E5928b51DcCC6DD",
             "delegate_ens": ""
         },
@@ -2587,12 +2587,12 @@
         {
             "max_boost_allocation": 1282.037593884868,
             "decay_boost_allocation": 2136.729323141447,
-            "max_boost_remaining": 213.14759839644262,
-            "decay_boost_remaining": 2136.729323141447,
-            "pct_max_consumed": 83.37430981641057,
-            "pct_decay_consumed": 0.0,
-            "max_consumed": 1068,
-            "decay_consume": 0,
+            "max_boost_remaining": 0.0,
+            "decay_boost_remaining": 2032.357788817135,
+            "pct_max_consumed": 100.0,
+            "pct_decay_consumed": 4.884639958554201,
+            "max_consumed": 1282,
+            "decay_consume": 104,
             "fee": 400,
             "boost_delegate": "0x344d9C4f488bb5519D390304457D64034618145C",
             "delegate_ens": ""
@@ -5124,14 +5124,14 @@
         "0xdA47862a83dac0c112BA89c6abC2159b95afd71C": {
             "symbol": "PRISMA",
             "decimals": "18",
-            "price": 0.04357028,
+            "price": 0.04244602,
             "token_logo_url": "https://assets.coingecko.com/coins/images/31520/small/PRISMA_200.png?1696530330",
             "total_supply": 300000000.0
         },
         "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28": {
             "symbol": "mkUSD",
             "decimals": "18",
-            "price": 0.980799,
+            "price": 0.980167,
             "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
             "total_supply": 11424232.348872207
         },
