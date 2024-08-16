@@ -1,6 +1,6 @@
 {
     "prisma_week": 53,
-    "updated_at": 1723802404,
+    "updated_at": 1723803005,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -912,7 +912,7 @@
                 },
                 {
                     "week_number": 53,
-                    "peg": 0.9951242493041266,
+                    "peg": 0.9951241572770446,
                     "lock_gain": 522131.0,
                     "current_boost_multiplier": 1.757018487,
                     "global_weight_ratio": 0.5266942518434676,
@@ -934,7 +934,7 @@
                 }
             ],
             "current_staking_apr": 1.2315634611715616,
-            "current_lp_apr": 1.6272032729659638
+            "current_lp_apr": 1.6266051470785259
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -1846,7 +1846,7 @@
                 },
                 {
                     "week_number": 53,
-                    "peg": 0.9514615938180794,
+                    "peg": 0.9513164540503852,
                     "lock_gain": 32691.0,
                     "current_boost_multiplier": 2.0,
                     "global_weight_ratio": 0.2612133154885086,
@@ -1868,7 +1868,7 @@
                 }
             ],
             "current_staking_apr": 1.3621734012693392,
-            "current_lp_apr": 1.4333917902156672
+            "current_lp_apr": 1.4225517465525868
         }
     },
     "emissions_schedule": [
@@ -5639,6 +5639,19 @@
             "decay_consume": 0,
             "fee": 1050,
             "boost_delegate": "0xbd101FFfAC618cc704F005315143dd63b445C5E7",
+            "delegate_ens": ""
+        },
+        {
+            "max_boost_allocation": 105.86028925580639,
+            "decay_boost_allocation": 176.43381542634398,
+            "max_boost_remaining": 105.86028925580639,
+            "decay_boost_remaining": 176.43381542634398,
+            "pct_max_consumed": 0.0,
+            "pct_decay_consumed": 0.0,
+            "max_consumed": 0,
+            "decay_consume": 0,
+            "fee": 999,
+            "boost_delegate": "0xD9cfab54f1234AeEA22B2818AB919866A2809c1C",
             "delegate_ens": ""
         }
     ],
