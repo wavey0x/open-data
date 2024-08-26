@@ -1,6 +1,6 @@
 {
     "prisma_week": 54,
-    "updated_at": 1724649005,
+    "updated_at": 1724649606,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -934,12 +934,12 @@
                 },
                 {
                     "week_number": 54,
-                    "peg": 0.9975111322395122,
+                    "peg": 0.9975117420028732,
                     "lock_gain": 1057877.0,
                     "current_boost_multiplier": 1.6947205585,
-                    "global_weight_ratio": 0.5331425252193454,
-                    "adjusted_weight_capture": 1.7476019435816932,
-                    "global_weight": 3959201302,
+                    "global_weight_ratio": 0.5331420770742027,
+                    "adjusted_weight_capture": 1.7475049096627506,
+                    "global_weight": 3959204630,
                     "weight": 2110818580,
                     "remaining_boost_data": {
                         "max_boost_allocation": 394162.56295060605,
@@ -952,11 +952,11 @@
                         "decay_consume": 200548
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.793328416621136
+                    "liquid_locker_weekly_dominance": 0.793328590343662
                 }
             ],
-            "current_staking_apr": 1.0072220228300812,
-            "current_lp_apr": 0.9702691053118494
+            "current_staking_apr": 0.9492608112599615,
+            "current_lp_apr": 0.9694779110645239
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -1891,12 +1891,12 @@
                 {
                     "week_number": 54,
                     "peg": 0.9755613328419672,
-                    "lock_gain": 178788.0,
+                    "lock_gain": 178852.0,
                     "current_boost_multiplier": 2.0,
-                    "global_weight_ratio": 0.2601858914017906,
-                    "adjusted_weight_capture": 0.6052088801540842,
-                    "global_weight": 3959201302,
-                    "weight": 1030128320,
+                    "global_weight_ratio": 0.26018651326945935,
+                    "adjusted_weight_capture": 0.6053899527877421,
+                    "global_weight": 3959204630,
+                    "weight": 1030131648,
                     "remaining_boost_data": {
                         "max_boost_allocation": 195725.13930320027,
                         "decay_boost_allocation": 326208.5655053337,
@@ -1908,10 +1908,10 @@
                         "decay_consume": 0
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.793328416621136
+                    "liquid_locker_weekly_dominance": 0.793328590343662
                 }
             ],
-            "current_staking_apr": 0.9781763047162784,
+            "current_staking_apr": 0.9781726144088452,
             "current_lp_apr": 1.3336748244121772
         }
     },
@@ -2803,7 +2803,7 @@
             "allocated_emissions": 997042.8552819483,
             "emissions_week": 43,
             "system_week": 54,
-            "net_emissions_returned": 29784.38822822203,
+            "net_emissions_returned": 29784.397647022502,
             "protocol_fee_distribution": {
                 "total_value": 41154.32184935301,
                 "distros": [
@@ -2829,7 +2829,7 @@
             "projected": true,
             "emissions_week": 44,
             "system_week": 55,
-            "allocated_emissions": 989304.7875455187,
+            "allocated_emissions": 989304.787620869,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
                 "total_value": 33265.80571304389,
@@ -2952,7 +2952,7 @@
             "pct_decay_consumed": 0.0,
             "max_consumed": 0,
             "decay_consume": 0,
-            "fee": 1299,
+            "fee": 1296,
             "boost_delegate": "0x62bd0DeC5A8733A0590891f97E5928b51DcCC6DD",
             "delegate_ens": ""
         },
@@ -3388,12 +3388,12 @@
         {
             "max_boost_allocation": 64.62183710081656,
             "decay_boost_allocation": 107.70306183469425,
-            "max_boost_remaining": 64.62183710081656,
-            "decay_boost_remaining": 107.70306183469425,
-            "pct_max_consumed": 0.0,
-            "pct_decay_consumed": 0.0,
-            "max_consumed": 0,
-            "decay_consume": 0,
+            "max_boost_remaining": 0.0,
+            "decay_boost_remaining": 105.68868189499238,
+            "pct_max_consumed": 100.0,
+            "pct_decay_consumed": 1.8703088894479123,
+            "max_consumed": 64,
+            "decay_consume": 2,
             "fee": 400,
             "boost_delegate": "0x0B9bdb591C62B8aa65AAf1688EEbD8d7EA1a1C53",
             "delegate_ens": ""
@@ -5718,7 +5718,7 @@
         "0x35282d87011f87508D457F08252Bc5bFa52E10A0": {
             "symbol": "ULTRA",
             "decimals": "18",
-            "price": 1.035017401886468,
+            "price": 1.033983278,
             "token_logo_url": "https://assets.coingecko.com/coins/images/35315/standard/ultra-logo.png",
             "total_supply": 245746.19433165182
         }
