@@ -1,6 +1,6 @@
 {
     "prisma_week": 67,
-    "updated_at": 1732259404,
+    "updated_at": 1732260004,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -1220,12 +1220,12 @@
                 },
                 {
                     "week_number": 67,
-                    "peg": 0.9465474888216072,
+                    "peg": 0.9464623460724914,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 2.0,
-                    "global_weight_ratio": 0.5618183599809115,
+                    "global_weight_ratio": 0.5617692946258184,
                     "adjusted_weight_capture": 0,
-                    "global_weight": 4779624283,
+                    "global_weight": 4780041739,
                     "weight": 2685280676,
                     "remaining_boost_data": {
                         "max_boost_allocation": 333926.44250498165,
@@ -1238,11 +1238,11 @@
                         "decay_consume": 0
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.8284954192078281
+                    "liquid_locker_weekly_dominance": 0.8284230641108216
                 }
             ],
-            "current_staking_apr": 0.405470866703659,
-            "current_lp_apr": 1.018871946425429
+            "current_staking_apr": 0.4055498715017773,
+            "current_lp_apr": 1.0247387062725881
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -2465,9 +2465,9 @@
                     "peg": 0.8754874579346609,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 2.0,
-                    "global_weight_ratio": 0.26667705922691665,
+                    "global_weight_ratio": 0.26665376948500324,
                     "adjusted_weight_capture": 0,
-                    "global_weight": 4779624283,
+                    "global_weight": 4780041739,
                     "weight": 1274616148,
                     "remaining_boost_data": {
                         "max_boost_allocation": 158504.11422894694,
@@ -2480,10 +2480,10 @@
                         "decay_consume": 0
                     },
                     "boost_fees_collected": 0,
-                    "liquid_locker_weekly_dominance": 0.8284954192078281
+                    "liquid_locker_weekly_dominance": 0.8284230641108216
                 }
             ],
-            "current_staking_apr": 0.4833350261040035,
+            "current_staking_apr": 0.48342932431059943,
             "current_lp_apr": 0.6093180248622104
         }
     },
@@ -3726,7 +3726,7 @@
             "allocated_emissions": 793493.0196532441,
             "emissions_week": 56,
             "system_week": 67,
-            "net_emissions_returned": 33998.52947108273,
+            "net_emissions_returned": 34004.40771245782,
             "protocol_fee_distribution": {
                 "total_value": 15235.330024406092,
                 "distros": [
@@ -3752,7 +3752,7 @@
             "projected": true,
             "emissions_week": 57,
             "system_week": 68,
-            "allocated_emissions": 788075.9466741509,
+            "allocated_emissions": 788075.9878218406,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
                 "total_value": 12252.273056365046,
@@ -6118,12 +6118,12 @@
         {
             "max_boost_allocation": 4912.608321729788,
             "decay_boost_allocation": 8187.680536216315,
-            "max_boost_remaining": 4912.608321729788,
-            "decay_boost_remaining": 8187.680536216315,
-            "pct_max_consumed": 0.0,
-            "pct_decay_consumed": 0.0,
-            "max_consumed": 0,
-            "decay_consume": 0,
+            "max_boost_remaining": 0.0,
+            "decay_boost_remaining": 7748.913345737464,
+            "pct_max_consumed": 100.0,
+            "pct_decay_consumed": 5.358870421703264,
+            "max_consumed": 4912,
+            "decay_consume": 438,
             "fee": 399,
             "boost_delegate": "0x61df2c422274b021460759F342e216010559D695",
             "delegate_ens": ""
@@ -6719,7 +6719,7 @@
         "0x35282d87011f87508D457F08252Bc5bFa52E10A0": {
             "symbol": "ULTRA",
             "decimals": "18",
-            "price": 1.0635286485724735,
+            "price": 1.0635435420000001,
             "token_logo_url": "https://assets.coingecko.com/coins/images/35315/standard/ultra-logo.png",
             "total_supply": 212954.10099933794
         }
