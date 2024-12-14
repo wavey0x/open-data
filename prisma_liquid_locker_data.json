@@ -1,6 +1,6 @@
 {
     "prisma_week": 70,
-    "updated_at": 1734208204,
+    "updated_at": 1734208804,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -1286,7 +1286,7 @@
                 },
                 {
                     "week_number": 70,
-                    "peg": 0.7792956613223013,
+                    "peg": 0.7821997204379241,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 1.2188642765,
                     "global_weight_ratio": 0.5519593353114502,
@@ -1307,8 +1307,8 @@
                     "liquid_locker_weekly_dominance": 0.8233765054710308
                 }
             ],
-            "current_staking_apr": 0.24966705694141128,
-            "current_lp_apr": 0.7090290152961158
+            "current_staking_apr": 0.24417808769779065,
+            "current_lp_apr": 0.7276877305419437
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -2594,7 +2594,7 @@
                 },
                 {
                     "week_number": 70,
-                    "peg": 0.7497732509830269,
+                    "peg": 0.7497732509813586,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 2.0,
                     "global_weight_ratio": 0.27141717015958056,
@@ -3939,7 +3939,7 @@
             "allocated_emissions": 783700.8554353198,
             "emissions_week": 59,
             "system_week": 70,
-            "net_emissions_returned": 100125.95212592988,
+            "net_emissions_returned": 100125.97768131702,
             "protocol_fee_distribution": {
                 "total_value": 10400.880330409836,
                 "distros": [
@@ -3965,7 +3965,7 @@
             "projected": true,
             "emissions_week": 60,
             "system_week": 71,
-            "allocated_emissions": 778915.831112154,
+            "allocated_emissions": 778915.8312910419,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
                 "total_value": 8958.878864088301,
@@ -4212,12 +4212,12 @@
         {
             "max_boost_allocation": 6886.330631331904,
             "decay_boost_allocation": 11477.217718886506,
-            "max_boost_remaining": 6886.330631331904,
-            "decay_boost_remaining": 11477.217718886506,
-            "pct_max_consumed": 0.0,
-            "pct_decay_consumed": 0.0,
-            "max_consumed": 0,
-            "decay_consume": 0,
+            "max_boost_remaining": 0.0,
+            "decay_boost_remaining": 11442.965428602363,
+            "pct_max_consumed": 100.0,
+            "pct_decay_consumed": 0.2984372268879984,
+            "max_consumed": 6886,
+            "decay_consume": 34,
             "fee": 900,
             "boost_delegate": "0xc1AF7B6E54e5d991cFE8F7494ddE81c1B33487Ac",
             "delegate_ens": ""
@@ -4641,11 +4641,11 @@
         {
             "max_boost_allocation": 2871.292825735777,
             "decay_boost_allocation": 4785.488042892961,
-            "max_boost_remaining": 2871.292825735777,
+            "max_boost_remaining": 1566.2256709832789,
             "decay_boost_remaining": 4785.488042892961,
-            "pct_max_consumed": 0.0,
-            "pct_decay_consumed": 0.0,
-            "max_consumed": 0,
+            "pct_max_consumed": 45.45224865450883,
+            "pct_decay_consumed": 4.751316342351121e-15,
+            "max_consumed": 1305,
             "decay_consume": 0,
             "fee": 600,
             "boost_delegate": "0xf91d92176255B58bB631E36973e44Cae271570A5",
