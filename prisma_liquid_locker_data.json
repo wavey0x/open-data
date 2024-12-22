@@ -1,6 +1,6 @@
 {
     "prisma_week": 71,
-    "updated_at": 1734888606,
+    "updated_at": 1734889204,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -1308,7 +1308,7 @@
                 },
                 {
                     "week_number": 71,
-                    "peg": 0.913603962209039,
+                    "peg": 0.9136091159650435,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 1.4588441685,
                     "global_weight_ratio": 0.555165669771009,
@@ -1330,7 +1330,7 @@
                 }
             ],
             "current_staking_apr": 0.17500318861473138,
-            "current_lp_apr": 0.54410820941482
+            "current_lp_apr": 0.5465352859991818
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -2638,9 +2638,9 @@
                 },
                 {
                     "week_number": 71,
-                    "peg": 0.9023261577795367,
+                    "peg": 0.9042982397341561,
                     "lock_gain": 0.0,
-                    "current_boost_multiplier": 2.0,
+                    "current_boost_multiplier": 1.9246988985,
                     "global_weight_ratio": 0.2746730482872119,
                     "adjusted_weight_capture": 0,
                     "global_weight": 4836899726,
@@ -2648,19 +2648,19 @@
                     "remaining_boost_data": {
                         "max_boost_allocation": 159302.0526030092,
                         "decay_boost_allocation": 265503.4210050154,
-                        "max_boost_remaining": 1957.627247223109,
-                        "decay_boost_remaining": 265503.4210050154,
-                        "pct_max_consumed": 98.77112239595454,
-                        "pct_decay_consumed": 1.0961753466891837e-14,
-                        "max_consumed": 157344,
-                        "decay_consume": 0
+                        "max_boost_remaining": 0.0,
+                        "decay_boost_remaining": 245511.7211449605,
+                        "pct_max_consumed": 100.0,
+                        "pct_decay_consumed": 7.529733434085295,
+                        "max_consumed": 159302,
+                        "decay_consume": 19991
                     },
                     "boost_fees_collected": 0,
                     "liquid_locker_weekly_dominance": 0.829838718058221
                 }
             ],
             "current_staking_apr": 0.14548828062209126,
-            "current_lp_apr": 1.0374224673069035
+            "current_lp_apr": 1.024652356310609
         }
     },
     "emissions_schedule": [
@@ -4010,7 +4010,7 @@
             "allocated_emissions": 779023.5315403538,
             "emissions_week": 60,
             "system_week": 71,
-            "net_emissions_returned": 60246.06151305605,
+            "net_emissions_returned": 60622.3919434594,
             "protocol_fee_distribution": {
                 "total_value": 8958.878864088301,
                 "distros": [
@@ -4036,7 +4036,7 @@
             "projected": true,
             "emissions_week": 61,
             "system_week": 72,
-            "allocated_emissions": 773992.0892501628,
+            "allocated_emissions": 773994.7235631755,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
                 "total_value": 7637.683504242345,
@@ -4114,12 +4114,12 @@
         {
             "max_boost_allocation": 159302.0526030092,
             "decay_boost_allocation": 265503.4210050154,
-            "max_boost_remaining": 1957.627247223109,
-            "decay_boost_remaining": 265503.4210050154,
-            "pct_max_consumed": 98.77112239595454,
-            "pct_decay_consumed": 1.0961753466891837e-14,
-            "max_consumed": 157344,
-            "decay_consume": 0,
+            "max_boost_remaining": 0.0,
+            "decay_boost_remaining": 245511.7211449605,
+            "pct_max_consumed": 100.0,
+            "pct_decay_consumed": 7.529733434085295,
+            "max_consumed": 159302,
+            "decay_consume": 19991,
             "fee": 5000,
             "boost_delegate": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
             "delegate_ens": ""
