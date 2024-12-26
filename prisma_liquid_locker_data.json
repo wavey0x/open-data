@@ -1,6 +1,6 @@
 {
     "prisma_week": 72,
-    "updated_at": 1735176003,
+    "updated_at": 1735176604,
     "liquid_lockers": {
         "cvxPrisma": {
             "locker": "0x8ad7a9e2B3Cd9214f36Cb871336d8ab34DdFdD5b",
@@ -1330,7 +1330,7 @@
                 },
                 {
                     "week_number": 72,
-                    "peg": 0.9227843241649606,
+                    "peg": 0.9227831832930827,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 2.0,
                     "global_weight_ratio": 0.5553371111840699,
@@ -1352,7 +1352,7 @@
                 }
             ],
             "current_staking_apr": 0.16899003482788497,
-            "current_lp_apr": 0.5870759270983902
+            "current_lp_apr": 0.5879680844188577
         },
         "yPRISMA": {
             "locker": "0x90be6DFEa8C80c184C442a36e17cB2439AAE25a7",
@@ -2682,7 +2682,7 @@
                 },
                 {
                     "week_number": 72,
-                    "peg": 0.8899836294612634,
+                    "peg": 0.8901031888449906,
                     "lock_gain": 0.0,
                     "current_boost_multiplier": 2.0,
                     "global_weight_ratio": 0.2772973541220567,
@@ -4110,8 +4110,17 @@
             "allocated_emissions": 768688.1591631544,
             "net_emissions_returned": 0,
             "protocol_fee_distribution": {
-                "total_value": 0,
-                "distros": []
+                "total_value": 7455.543570896759,
+                "distros": [
+                    {
+                        "token": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
+                        "amount": 7455.543570896759,
+                        "value": 7455.543570896759,
+                        "token_price": 1.0133167307299216,
+                        "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
+                        "symbol": "mkUSD"
+                    }
+                ]
             },
             "lock_weeks": 0,
             "emissions_rate_change_week": false,
@@ -7086,7 +7095,7 @@
             "decimals": "18",
             "price": 1.0133167307299216,
             "token_logo_url": "https://assets.coingecko.com/coins/images/31519/standard/mkUSD_200.png",
-            "total_supply": 2070667.2900652369
+            "total_supply": 2077644.2739027513
         },
         "0x35282d87011f87508D457F08252Bc5bFa52E10A0": {
             "symbol": "ULTRA",
