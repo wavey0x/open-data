@@ -32,8 +32,8 @@
                 },
                 "swap_min": 10.0,
                 "swap_max": 30000.0,
-                "swap_min_usd": 10.0,
-                "swap_max_usd": 30000.0,
+                "swap_min_usd": 9.92668,
+                "swap_max_usd": 29780.04,
                 "reward_token_decimals": 18,
                 "reward_token": "0x04AeBe2e4301CdF5E9c57B01eBdfe4Ac4B48DD13",
                 "price_per_share_autocompounder": 1.5438553442709708,
@@ -474,27 +474,27 @@
                 "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-128.png",
                     "symbol": "mkUSD",
-                    "price": 1
+                    "price": 0.992668
                 },
                 "0xdA47862a83dac0c112BA89c6abC2159b95afd71C": {
                     "logoURI": "https://assets.coingecko.com/coins/images/31520/large/PRISMA_200.png?1696530330",
                     "symbol": "PRISMA",
-                    "price": 0.03019973
+                    "price": 0.03059213
                 },
                 "0xe3668873D944E4A949DA05fc8bDE419eFF543882": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xe3668873D944E4A949DA05fc8bDE419eFF543882/logo-128.png",
                     "symbol": "yPRISMA",
-                    "price": 0.02937255650167663
+                    "price": 0.03003378
                 },
                 "0x11AaE8beE9b1Da827C641540D20e4e664677e06F": {
                     "logoURI": "",
                     "symbol": "yvyPRISMA-1",
-                    "price": 0.04534697833001451
+                    "price": 0.0463678117616586
                 },
                 "0x04AeBe2e4301CdF5E9c57B01eBdfe4Ac4B48DD13": {
                     "logoURI": "",
                     "symbol": "yvmkUSD-A",
-                    "price": 1.0
+                    "price": 0.992668
                 }
             }
         },
@@ -530,12 +530,12 @@
                 },
                 "swap_min": 100.0,
                 "swap_max": 9030.421522793165,
-                "swap_min_usd": 106.08274787803602,
-                "swap_max_usd": 9579.719296348574,
+                "swap_min_usd": 106.2133847347029,
+                "swap_max_usd": 9591.51635516972,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 1.9268012059773552,
-                "price_per_share_reward_token": 1.0610545444528732,
+                "price_per_share_autocompounder": 1.9269242852474862,
+                "price_per_share_reward_token": 1.0610727745724566,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
                 "credit": 32154.798624041974
@@ -545,16 +545,33 @@
                 "splitter": "0x05Fc8174050f0A41dEB7e562187911d45cd5e401",
                 "fee_burner": "0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8",
                 "receiver_balance": 0.0,
-                "burner_balances": {},
+                "burner_balances": {
+                    "0xdBdb4d16EdA451D0503b854CF79D55697F90c8DF": {
+                        "balance": 375.19464022888997,
+                        "symbol": "ALCX"
+                    },
+                    "0xCdF7028ceAB81fA0C6971208e83fa7872994beE5": {
+                        "balance": 240184.1943504136,
+                        "symbol": "T"
+                    },
+                    "0x40D16FC0246aD3160Ccc09B8D0D3A2cD28aE6C2f": {
+                        "balance": 551.3307392273989,
+                        "symbol": "GHO"
+                    },
+                    "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": {
+                        "balance": 8.721100895274347,
+                        "symbol": "WETH"
+                    }
+                },
                 "split_ratio_admin_fees": [
                     0.8298360403329977,
                     0.0,
                     0.17016395966700226
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7669014196299183,
-                    0.10847833274873935,
-                    0.1246202476213423
+                    0.7669702925253501,
+                    0.1083982681185377,
+                    0.12463143935611215
                 ]
             },
             "ybs_data": {
@@ -958,31 +975,31 @@
                 "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E/logo-128.png",
                     "symbol": "crvUSD",
-                    "price": 0.999786
+                    "price": 1.001
                 },
                 "0xD533a949740bb3306d119CC777fa900bA034cd52": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xD533a949740bb3306d119CC777fa900bA034cd52/logo-128.png",
                     "symbol": "CRV",
-                    "price": 0.516796
+                    "price": 0.519853
                 },
                 "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xFCc5c47bE19d06BF83eB04298b026F81069ff65b/logo-128.png",
                     "symbol": "yCRV",
-                    "price": 0.367797
+                    "price": 0.367869
                 },
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.7086717031548533
+                    "price": 0.7088557098897075
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.0608274787803602
+                    "price": 1.062133847347029
                 }
             }
         }
     },
-    "last_update": 1740032402,
-    "last_update_block": 21885739
+    "last_update": 1740042002,
+    "last_update_block": 21886535
 }
