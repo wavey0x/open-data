@@ -582,10 +582,10 @@
             "peg_data": {
                 "peg_token": "0xD533a949740bb3306d119CC777fa900bA034cd52",
                 "swap_size": 10000.0,
-                "output_amount": 5429.046926071966,
-                "peg": 0.5429046926071965,
-                "balance_peg_token": 412090.1926400353,
-                "balance_ylocker_token": 7727899.570341056,
+                "output_amount": 5412.36524121995,
+                "peg": 0.541236524121995,
+                "balance_peg_token": 410653.54925598117,
+                "balance_ylocker_token": 7730532.537919311,
                 "pool": "0x99f5aCc8EC2Da2BC0771c32814EFF52b712de1E5"
             },
             "strategy_data": {
@@ -600,12 +600,12 @@
                 },
                 "swap_min": 100.0,
                 "swap_max": 7370.88435104316,
-                "swap_min_usd": 106.70923186433048,
-                "swap_max_usd": 7865.414072606296,
+                "swap_min_usd": 106.71193356930486,
+                "swap_max_usd": 7865.613212155465,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 1.9761159028462396,
-                "price_per_share_reward_token": 1.0671189966182202,
+                "price_per_share_autocompounder": 1.9761228041804173,
+                "price_per_share_reward_token": 1.0671193356930486,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
                 "credit": 24670.34019496859
@@ -616,20 +616,12 @@
                 "fee_burner": "0xb911Fcce8D5AFCEc73E072653107260bb23C1eE8",
                 "receiver_balance": 0.0,
                 "burner_balances": {
-                    "0x090185f2135308BaD17527004364eBcC2D37e5F6": {
-                        "balance": 18137099.757168632,
-                        "symbol": "SPELL"
-                    },
-                    "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": {
-                        "balance": 12181.70771,
-                        "symbol": "USDC"
-                    },
                     "0x7448c7456a97769F6cD04F1E83A4a23cCdC46aBD": {
                         "balance": 4.266552156329352,
                         "symbol": "MAV"
                     },
                     "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
-                        "balance": 52276.46664723886,
+                        "balance": 74937.46493437755,
                         "symbol": "crvUSD"
                     }
                 },
@@ -639,9 +631,9 @@
                     0.1577853458714614
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7541472530298527,
-                    0.1042418310914266,
-                    0.14161091587872057
+                    0.7541513530795728,
+                    0.1042369611498935,
+                    0.14161168577053368
                 ]
             },
             "ybs_data": {
@@ -1115,12 +1107,12 @@
                 "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E/logo-128.png",
                     "symbol": "crvUSD",
-                    "price": 0.999975
+                    "price": 1
                 },
                 "0xD533a949740bb3306d119CC777fa900bA034cd52": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xD533a949740bb3306d119CC777fa900bA034cd52/logo-128.png",
                     "symbol": "CRV",
-                    "price": 0.56847
+                    "price": 0.571278
                 },
                 "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xFCc5c47bE19d06BF83eB04298b026F81069ff65b/logo-128.png",
@@ -1130,16 +1122,16 @@
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.5919020441477285
+                    "price": 0.5919041112905521
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.0670923186433048
+                    "price": 1.0671193356930486
                 }
             }
         }
     },
-    "last_update": 1744332004,
-    "last_update_block": 22242170
+    "last_update": 1744332604,
+    "last_update_block": 22242220
 }
