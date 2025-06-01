@@ -1,583 +1,5 @@
 {
     "data": {
-        "0xe3668873D944E4A949DA05fc8bDE419eFF543882": {
-            "token": "0xe3668873D944E4A949DA05fc8bDE419eFF543882",
-            "ybs": "0xF4C6e0E006F164535508787873d86b84fe901975",
-            "decimals": 18,
-            "symbol": "yPRISMA",
-            "rewards": "0x2667BA23c782a8DDc31174Ef472a676eb5C709b3",
-            "utils": "0xC4B4CeAF8bF4f2dAD1502457d53D084f20291fAE",
-            "ybs_deploy_block": 19879001,
-            "reward_token_is_v2": false,
-            "reward_token": "0x04AeBe2e4301CdF5E9c57B01eBdfe4Ac4B48DD13",
-            "reward_token_underlying": "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28",
-            "peg_data": {
-                "peg_token": "0xdA47862a83dac0c112BA89c6abC2159b95afd71C",
-                "swap_size": 10000.0,
-                "output_amount": 9750.101810180257,
-                "peg": 0.9750101810180256,
-                "balance_peg_token": 455954.2710247239,
-                "balance_ylocker_token": 794442.0388347037,
-                "pool": "0x69833361991ed76f9e8DBBcdf9ea1520fEbFb4a7"
-            },
-            "strategy_data": {
-                "is_v2": false,
-                "autocompounder": "0x11AaE8beE9b1Da827C641540D20e4e664677e06F",
-                "strategy": "0xA323CCcbCbaDe7806ca5bB9951bebD89A7882bf8",
-                "unsold_rewards": 0.0,
-                "profit_release_data": {
-                    "unlock_rate": 0,
-                    "unlock_date": 0,
-                    "apr": 0
-                },
-                "swap_min": 10.0,
-                "swap_max": 30000.0,
-                "swap_min_usd": 10.129999999999999,
-                "swap_max_usd": 30389.999999999996,
-                "reward_token_decimals": 18,
-                "reward_token": "0x04AeBe2e4301CdF5E9c57B01eBdfe4Ac4B48DD13",
-                "price_per_share_autocompounder": 1.5438553442709708,
-                "price_per_share_reward_token": 1.0,
-                "claimable_rewards": 0.0,
-                "harvest_trigger": false,
-                "credit": 0.0
-            },
-            "pipeline_data": {},
-            "ybs_data": {
-                "weekly_data": {
-                    "48": {
-                        "global_weight": 33033358.739520483,
-                        "global_balance": 14797040.192937374,
-                        "start_time": 1720656000,
-                        "start_block": 20279540,
-                        "system_avg_boost": 2.232430155544708,
-                        "strategy_weight": 11885505.16804534,
-                        "strategy_balance": 5401045.850134677,
-                        "strategy_boost": 2.2005932735692237
-                    },
-                    "47": {
-                        "global_weight": 30615476.69763005,
-                        "global_balance": 14423576.847704198,
-                        "start_time": 1720051200,
-                        "start_block": 20229427,
-                        "system_avg_boost": 2.1225994786794593,
-                        "strategy_weight": 10710093.468496243,
-                        "strategy_balance": 5224422.086491385,
-                        "strategy_boost": 2.050005396039684
-                    },
-                    "46": {
-                        "global_weight": 28322828.819354616,
-                        "global_balance": 15101474.40496315,
-                        "start_time": 1719446400,
-                        "start_block": 20179300,
-                        "system_avg_boost": 1.8755008987762296,
-                        "strategy_weight": 9656407.367107289,
-                        "strategy_balance": 5810898.148537578,
-                        "strategy_boost": 1.6617753607568402
-                    },
-                    "45": {
-                        "global_weight": 25825936.29833815,
-                        "global_balance": 13144419.198959157,
-                        "start_time": 1718841600,
-                        "start_block": 20129225,
-                        "system_avg_boost": 1.9647833736452334,
-                        "strategy_weight": 7880629.229791688,
-                        "strategy_balance": 4051709.4820956117,
-                        "strategy_boost": 1.9450133985706435
-                    },
-                    "44": {
-                        "global_weight": 22855148.320180144,
-                        "global_balance": 10958355.887806587,
-                        "start_time": 1718236800,
-                        "start_block": 20079185,
-                        "system_avg_boost": 2.085636618683937,
-                        "strategy_weight": 6879196.1068060845,
-                        "strategy_balance": 3245882.906022382,
-                        "strategy_boost": 2.119360527159648
-                    },
-                    "43": {
-                        "global_weight": 17378748.306053028,
-                        "global_balance": 10392782.632444736,
-                        "start_time": 1717632000,
-                        "start_block": 20029070,
-                        "system_avg_boost": 1.6721939561979422,
-                        "strategy_weight": 5229832.493297936,
-                        "strategy_balance": 3197614.681253649,
-                        "strategy_boost": 1.6355418068219343
-                    },
-                    "42": {
-                        "global_weight": 12678146.698818749,
-                        "global_balance": 10098870.479863778,
-                        "start_time": 1717027200,
-                        "start_block": 19978947,
-                        "system_avg_boost": 1.2554024456594242,
-                        "strategy_weight": 3843171.9373956737,
-                        "strategy_balance": 3047252.1412076307,
-                        "strategy_boost": 1.2611926284093506
-                    },
-                    "41": {
-                        "global_weight": 8010855.051665299,
-                        "global_balance": 8794157.136932442,
-                        "start_time": 1716422400,
-                        "start_block": 19928862,
-                        "system_avg_boost": 0.9109292598403156,
-                        "strategy_weight": 2241195.2067554467,
-                        "strategy_balance": 2461819.6473825844,
-                        "strategy_boost": 0.9103815582665828
-                    },
-                    "40": {
-                        "global_weight": 3664912.3833406223,
-                        "global_balance": 7329824.766681245,
-                        "start_time": 1715817600,
-                        "start_block": 19879001,
-                        "system_avg_boost": 0.5,
-                        "strategy_weight": 1010285.3830641547,
-                        "strategy_balance": 2020570.7661283093,
-                        "strategy_boost": 0.5
-                    },
-                    "49": {
-                        "global_weight": 34660272.64154483,
-                        "global_balance": 14724279.718369849,
-                        "start_time": 1721260800,
-                        "start_block": 20329690,
-                        "system_avg_boost": 2.3539536944753263,
-                        "strategy_weight": 13075333.550314587,
-                        "strategy_balance": 5544087.638984272,
-                        "strategy_boost": 2.358428365809547
-                    },
-                    "50": {
-                        "global_weight": 35896573.27297941,
-                        "global_balance": 14991504.240241261,
-                        "start_time": 1721865600,
-                        "start_block": 20379839,
-                        "system_avg_boost": 2.3944610692650357,
-                        "strategy_weight": 14086832.74303863,
-                        "strategy_balance": 5938945.523550307,
-                        "strategy_boost": 2.371941733962481
-                    },
-                    "51": {
-                        "global_weight": 36438782.54543603,
-                        "global_balance": 15126435.012294807,
-                        "start_time": 1722470400,
-                        "start_block": 20429973,
-                        "system_avg_boost": 2.408947152175545,
-                        "strategy_weight": 14630779.621867124,
-                        "strategy_balance": 6070656.406088716,
-                        "strategy_boost": 2.410081981775944
-                    },
-                    "52": {
-                        "global_weight": 37410173.348593265,
-                        "global_balance": 15461474.16974952,
-                        "start_time": 1723075200,
-                        "start_block": 20480142,
-                        "system_avg_boost": 2.4195735114175934,
-                        "strategy_weight": 15128898.475746494,
-                        "strategy_balance": 6184036.078647476,
-                        "strategy_boost": 2.446444083336488
-                    },
-                    "53": {
-                        "global_weight": 38498414.87053339,
-                        "global_balance": 15849241.53022438,
-                        "start_time": 1723680000,
-                        "start_block": 20530310,
-                        "system_avg_boost": 2.4290383105789144,
-                        "strategy_weight": 15769613.774870882,
-                        "strategy_balance": 6369560.8559527155,
-                        "strategy_boost": 2.475777236688662
-                    },
-                    "54": {
-                        "global_weight": 39624440.08866395,
-                        "global_balance": 17048219.643089183,
-                        "start_time": 1724284800,
-                        "start_block": 20580430,
-                        "system_avg_boost": 2.3242567797820732,
-                        "strategy_weight": 16578963.06461484,
-                        "strategy_balance": 7133026.607626689,
-                        "strategy_boost": 2.3242536410685024
-                    },
-                    "55": {
-                        "global_weight": 40920681.582971945,
-                        "global_balance": 17550727.81503027,
-                        "start_time": 1724889600,
-                        "start_block": 20630527,
-                        "system_avg_boost": 2.331566076019245,
-                        "strategy_weight": 17224301.129393626,
-                        "strategy_balance": 7496779.0753647145,
-                        "strategy_boost": 2.2975601863465176
-                    },
-                    "56": {
-                        "global_weight": 42050323.87533881,
-                        "global_balance": 17719231.807894904,
-                        "start_time": 1725494400,
-                        "start_block": 20680663,
-                        "system_avg_boost": 2.373145987999494,
-                        "strategy_weight": 17931439.74302149,
-                        "strategy_balance": 7602484.265425132,
-                        "strategy_boost": 2.3586289845505863
-                    },
-                    "57": {
-                        "global_weight": 43334329.827998646,
-                        "global_balance": 18033041.239307344,
-                        "start_time": 1726099200,
-                        "start_block": 20730812,
-                        "system_avg_boost": 2.4030516679317,
-                        "strategy_weight": 18751757.9854679,
-                        "strategy_balance": 7874477.006766657,
-                        "strategy_boost": 2.381333765957311
-                    },
-                    "58": {
-                        "global_weight": 43251296.65481025,
-                        "global_balance": 17493220.58301223,
-                        "start_time": 1726704000,
-                        "start_block": 20780917,
-                        "system_avg_boost": 2.4724604854529666,
-                        "strategy_weight": 18635730.32535131,
-                        "strategy_balance": 7469760.564940803,
-                        "strategy_boost": 2.494822981718825
-                    },
-                    "59": {
-                        "global_weight": 42758473.465503946,
-                        "global_balance": 18177547.0818736,
-                        "start_time": 1727308800,
-                        "start_block": 20831061,
-                        "system_avg_boost": 2.3522686131916064,
-                        "strategy_weight": 19735135.72636919,
-                        "strategy_balance": 8667179.722265681,
-                        "strategy_boost": 2.2769962500800944
-                    },
-                    "60": {
-                        "global_weight": 43615778.7846647,
-                        "global_balance": 18561587.438573796,
-                        "start_time": 1727913600,
-                        "start_block": 20881262,
-                        "system_avg_boost": 2.3497871035547577,
-                        "strategy_weight": 20802566.590159148,
-                        "strategy_balance": 9071423.12175595,
-                        "strategy_boost": 2.293197694666943
-                    },
-                    "61": {
-                        "global_weight": 44908559.92111443,
-                        "global_balance": 18907799.538104724,
-                        "start_time": 1728518400,
-                        "start_block": 20931483,
-                        "system_avg_boost": 2.375134125502579,
-                        "strategy_weight": 21834315.439186987,
-                        "strategy_balance": 9312409.918279892,
-                        "strategy_boost": 2.3446471569434557
-                    },
-                    "62": {
-                        "global_weight": 46227696.89636677,
-                        "global_balance": 19253574.0436947,
-                        "start_time": 1729123200,
-                        "start_block": 20981561,
-                        "system_avg_boost": 2.40099302038448,
-                        "strategy_weight": 22685443.902168706,
-                        "strategy_balance": 9398728.777201204,
-                        "strategy_boost": 2.413671512385538
-                    },
-                    "63": {
-                        "global_weight": 43805782.92504974,
-                        "global_balance": 17822187.416936826,
-                        "start_time": 1729728000,
-                        "start_block": 21031734,
-                        "system_avg_boost": 2.457935263514293,
-                        "strategy_weight": 19982080.25066203,
-                        "strategy_balance": 7992832.100264812,
-                        "strategy_boost": 2.5
-                    },
-                    "64": {
-                        "global_weight": 44182951.15679544,
-                        "global_balance": 17837488.515572444,
-                        "start_time": 1730332800,
-                        "start_block": 21081895,
-                        "system_avg_boost": 2.476971526469264,
-                        "strategy_weight": 20170466.14229098,
-                        "strategy_balance": 8068186.456916393,
-                        "strategy_boost": 2.4999999999999996
-                    },
-                    "65": {
-                        "global_weight": 43507384.261232905,
-                        "global_balance": 18006135.025378518,
-                        "start_time": 1730937600,
-                        "start_block": 21132051,
-                        "system_avg_boost": 2.416253360308138,
-                        "strategy_weight": 19956357.087215707,
-                        "strategy_balance": 7982542.834886284,
-                        "strategy_boost": 2.4999999999999996
-                    },
-                    "66": {
-                        "global_weight": 40557091.06067551,
-                        "global_balance": 16743428.499128731,
-                        "start_time": 1731542400,
-                        "start_block": 21182213,
-                        "system_avg_boost": 2.4222691943162036,
-                        "strategy_weight": 19837582.57817664,
-                        "strategy_balance": 7935033.031270656,
-                        "strategy_boost": 2.5
-                    },
-                    "67": {
-                        "global_weight": 41564644.8341204,
-                        "global_balance": 17728687.65852187,
-                        "start_time": 1732147200,
-                        "start_block": 21232386,
-                        "system_avg_boost": 2.3444851437800027,
-                        "strategy_weight": 19997791.457500037,
-                        "strategy_balance": 7999116.583000015,
-                        "strategy_boost": 2.5
-                    },
-                    "68": {
-                        "global_weight": 41079295.0561731,
-                        "global_balance": 17185365.686993822,
-                        "start_time": 1732752000,
-                        "start_block": 21282523,
-                        "system_avg_boost": 2.390364907233985,
-                        "strategy_weight": 18757092.500187937,
-                        "strategy_balance": 7502837.0000751745,
-                        "strategy_boost": 2.5
-                    },
-                    "69": {
-                        "global_weight": 41494034.90600575,
-                        "global_balance": 17169239.026249446,
-                        "start_time": 1733356800,
-                        "start_block": 21332579,
-                        "system_avg_boost": 2.4167661037607417,
-                        "strategy_weight": 18639541.30572642,
-                        "strategy_balance": 7455816.522290568,
-                        "strategy_boost": 2.5
-                    },
-                    "70": {
-                        "global_weight": 39423307.42802545,
-                        "global_balance": 16234952.363706108,
-                        "start_time": 1733961600,
-                        "start_block": 21382703,
-                        "system_avg_boost": 2.428298312482754,
-                        "strategy_weight": 16148937.2379652,
-                        "strategy_balance": 6459574.895186081,
-                        "strategy_boost": 2.5
-                    },
-                    "71": {
-                        "global_weight": 38120629.479679294,
-                        "global_balance": 15468863.485953918,
-                        "start_time": 1734566400,
-                        "start_block": 21432853,
-                        "system_avg_boost": 2.4643458463702714,
-                        "strategy_weight": 14485678.076202335,
-                        "strategy_balance": 5817310.122684657,
-                        "strategy_boost": 2.4900989926109136
-                    },
-                    "72": {
-                        "global_weight": 38456618.52203904,
-                        "global_balance": 15809596.435183525,
-                        "start_time": 1735171200,
-                        "start_block": 21482925,
-                        "system_avg_boost": 2.43248578037423,
-                        "strategy_weight": 14723588.479991982,
-                        "strategy_balance": 6198599.1720850235,
-                        "strategy_boost": 2.3753090127683487
-                    },
-                    "73": {
-                        "global_weight": 37027720.473296955,
-                        "global_balance": 15079518.7843031,
-                        "start_time": 1735776000,
-                        "start_block": 21533059,
-                        "system_avg_boost": 2.4554974865537917,
-                        "strategy_weight": 14984645.249485066,
-                        "strategy_balance": 6224291.004097466,
-                        "strategy_boost": 2.4074461235216407
-                    },
-                    "74": {
-                        "global_weight": 33559175.881210916,
-                        "global_balance": 13423670.352484366,
-                        "start_time": 1736380800,
-                        "start_block": 21583204,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 13311989.690331576,
-                        "strategy_balance": 5324795.876132631,
-                        "strategy_boost": 2.5
-                    },
-                    "75": {
-                        "global_weight": 32500602.08172153,
-                        "global_balance": 13000240.832688613,
-                        "start_time": 1736985600,
-                        "start_block": 21633326,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 12573257.56470318,
-                        "strategy_balance": 5029303.025881272,
-                        "strategy_boost": 2.5
-                    },
-                    "76": {
-                        "global_weight": 29463378.91651684,
-                        "global_balance": 11785351.566606736,
-                        "start_time": 1737590400,
-                        "start_block": 21683472,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 12285540.67763817,
-                        "strategy_balance": 4914216.271055267,
-                        "strategy_boost": 2.5000000000000004
-                    },
-                    "77": {
-                        "global_weight": 28451356.329399794,
-                        "global_balance": 11380542.531759918,
-                        "start_time": 1738195200,
-                        "start_block": 21733627,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 12248932.74241168,
-                        "strategy_balance": 4899573.096964672,
-                        "strategy_boost": 2.5
-                    },
-                    "78": {
-                        "global_weight": 28102793.615087226,
-                        "global_balance": 11241117.446034892,
-                        "start_time": 1738800000,
-                        "start_block": 21783740,
-                        "system_avg_boost": 2.4999999999999996,
-                        "strategy_weight": 12085125.001030521,
-                        "strategy_balance": 4834050.000412208,
-                        "strategy_boost": 2.5000000000000004
-                    },
-                    "79": {
-                        "global_weight": 27840238.103241663,
-                        "global_balance": 11136095.241296666,
-                        "start_time": 1739404800,
-                        "start_block": 21833846,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 12085125.001030521,
-                        "strategy_balance": 4834050.000412208,
-                        "strategy_boost": 2.5000000000000004
-                    },
-                    "80": {
-                        "global_weight": 27619895.76624599,
-                        "global_balance": 11047958.306498397,
-                        "start_time": 1740009600,
-                        "start_block": 21883856,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 12013104.432933316,
-                        "strategy_balance": 4805241.773173327,
-                        "strategy_boost": 2.5
-                    },
-                    "81": {
-                        "global_weight": 27608574.26396095,
-                        "global_balance": 11043429.705584379,
-                        "start_time": 1740614400,
-                        "start_block": 21933949,
-                        "system_avg_boost": 2.5000000000000004,
-                        "strategy_weight": 12013104.432933316,
-                        "strategy_balance": 4805241.773173327,
-                        "strategy_boost": 2.5
-                    },
-                    "82": {
-                        "global_weight": 27553896.600615263,
-                        "global_balance": 11021558.640246106,
-                        "start_time": 1741219200,
-                        "start_block": 21984129,
-                        "system_avg_boost": 2.4999999999999996,
-                        "strategy_weight": 12013104.432933316,
-                        "strategy_balance": 4805241.773173327,
-                        "strategy_boost": 2.5
-                    },
-                    "83": {
-                        "global_weight": 25041125.11587906,
-                        "global_balance": 10016450.046351623,
-                        "start_time": 1741824000,
-                        "start_block": 22034225,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 9500332.948197111,
-                        "strategy_balance": 3800133.179278844,
-                        "strategy_boost": 2.5000000000000004
-                    },
-                    "84": {
-                        "global_weight": 14716738.570999315,
-                        "global_balance": 5886695.428399726,
-                        "start_time": 1742428800,
-                        "start_block": 22084357,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 5429862.10828269,
-                        "strategy_balance": 2171944.8433130756,
-                        "strategy_boost": 2.5000000000000004
-                    },
-                    "85": {
-                        "global_weight": 13293272.991240758,
-                        "global_balance": 5317309.196496303,
-                        "start_time": 1743033600,
-                        "start_block": 22134527,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 5314029.050250703,
-                        "strategy_balance": 2125611.620100281,
-                        "strategy_boost": 2.5
-                    },
-                    "86": {
-                        "global_weight": 11031465.280550528,
-                        "global_balance": 4412586.112220212,
-                        "start_time": 1743638400,
-                        "start_block": 22184670,
-                        "system_avg_boost": 2.4999999999999996,
-                        "strategy_weight": 5314029.050250703,
-                        "strategy_balance": 2125611.620100281,
-                        "strategy_boost": 2.5
-                    },
-                    "87": {
-                        "global_weight": 7049621.257811453,
-                        "global_balance": 2821835.128593089,
-                        "start_time": 1744243200,
-                        "start_block": 22234794,
-                        "system_avg_boost": 2.49823995256812,
-                        "strategy_weight": 2661285.7334785815,
-                        "strategy_balance": 1064514.2933914326,
-                        "strategy_boost": 2.5
-                    },
-                    "88": {
-                        "global_weight": 6140873.161011652,
-                        "global_balance": 2456349.264404661,
-                        "start_time": 1744848000,
-                        "start_block": 22284997,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 1991497.0578511925,
-                        "strategy_balance": 796598.8231404771,
-                        "strategy_boost": 2.5
-                    },
-                    "88": {
-                        "global_weight": 6140873.161011652,
-                        "global_balance": 2456349.264404661,
-                        "start_time": 1744848000,
-                        "start_block": 22284997,
-                        "system_avg_boost": 2.5,
-                        "strategy_weight": 1991497.0578511925,
-                        "strategy_balance": 796598.8231404771,
-                        "strategy_boost": 2.5
-                    }
-                },
-                "ybs": "0xF4C6e0E006F164535508787873d86b84fe901975",
-                "rewards": "0x2667BA23c782a8DDc31174Ef472a676eb5C709b3",
-                "utils": "0xC4B4CeAF8bF4f2dAD1502457d53D084f20291fAE"
-            },
-            "price_data": {
-                "0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28": {
-                    "logoURI": "https://assets.smold.app/api/token/1/0x4591DBfF62656E7859Afe5e45f6f47D3669fBB28/logo-128.png",
-                    "symbol": "mkUSD",
-                    "price": 1.013
-                },
-                "0xdA47862a83dac0c112BA89c6abC2159b95afd71C": {
-                    "logoURI": "https://assets.coingecko.com/coins/images/31520/large/PRISMA_200.png?1696530330",
-                    "symbol": "PRISMA",
-                    "price": 0.04464184
-                },
-                "0xe3668873D944E4A949DA05fc8bDE419eFF543882": {
-                    "logoURI": "https://assets.smold.app/api/token/1/0xe3668873D944E4A949DA05fc8bDE419eFF543882/logo-128.png",
-                    "symbol": "yPRISMA",
-                    "price": 0.043521382901249316
-                },
-                "0x11AaE8beE9b1Da827C641540D20e4e664677e06F": {
-                    "logoURI": "",
-                    "symbol": "yvyPRISMA-1",
-                    "price": 0.067190719582157
-                },
-                "0x04AeBe2e4301CdF5E9c57B01eBdfe4Ac4B48DD13": {
-                    "logoURI": "",
-                    "symbol": "yvmkUSD-A",
-                    "price": 1.013
-                }
-            }
-        },
         "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
             "token": "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b",
             "ybs": "0xE9A115b77A1057C918F997c32663FdcE24FB873f",
@@ -592,10 +14,10 @@
             "peg_data": {
                 "peg_token": "0xD533a949740bb3306d119CC777fa900bA034cd52",
                 "swap_size": 10000.0,
-                "output_amount": 5308.553574866519,
-                "peg": 0.5308553574866519,
-                "balance_peg_token": 405700.0680192118,
-                "balance_ylocker_token": 7821907.670354538,
+                "output_amount": 5058.350532549715,
+                "peg": 0.5058350532549716,
+                "balance_peg_token": 420512.1165728152,
+                "balance_ylocker_token": 8590473.127904944,
                 "pool": "0x99f5aCc8EC2Da2BC0771c32814EFF52b712de1E5"
             },
             "strategy_data": {
@@ -604,21 +26,21 @@
                 "strategy": "0xe3974E44bc08f435da2c6DB7D01e1758496dA119",
                 "unsold_rewards": 0.0,
                 "profit_release_data": {
-                    "unlock_rate": 0.0179131297538804,
-                    "unlock_date": 1745510411,
-                    "apr": 0.012233938147854196
+                    "unlock_rate": 0.29859216832023505,
+                    "unlock_date": 1748811227,
+                    "apr": 0.226198356849725
                 },
                 "swap_min": 100.0,
-                "swap_max": 10044.244807521221,
-                "swap_min_usd": 106.76675966783418,
-                "swap_max_usd": 10723.914714095095,
+                "swap_max": 9611.849737140014,
+                "swap_min_usd": 107.0934515882961,
+                "swap_max_usd": 10293.661644983807,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 1.9894097627318748,
-                "price_per_share_reward_token": 1.0676675966783418,
+                "price_per_share_autocompounder": 2.0277475931427773,
+                "price_per_share_reward_token": 1.0710566163372235,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
-                "credit": 0.0
+                "credit": 4161.00758155596
             },
             "pipeline_data": {
                 "receiver": "0x642a16A7885d7a8b9353E2a4B68834f31389dC2c",
@@ -629,17 +51,21 @@
                     "0x7448c7456a97769F6cD04F1E83A4a23cCdC46aBD": {
                         "balance": 4.266552156329352,
                         "symbol": "MAV"
+                    },
+                    "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
+                        "balance": 3823.1679498599237,
+                        "symbol": "crvUSD"
                     }
                 },
                 "split_ratio_admin_fees": [
-                    0.8441211440719001,
+                    0.8488485746223692,
                     0.0,
-                    0.1558788559281
+                    0.1511514253776309
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7424705099546735,
-                    0.10330813536042045,
-                    0.15422135468490622
+                    0.7504412808141465,
+                    0.10086916891427272,
+                    0.14868955027158068
                 ]
             },
             "ybs_data": {
@@ -1104,12 +530,72 @@
                         "strategy_balance": 46175520.35093915,
                         "strategy_boost": 2.3705987826876975
                     },
+                    "51": {
+                        "global_weight": 146034388.6848636,
+                        "global_balance": 61554052.292316236,
+                        "start_time": 1748476800,
+                        "start_block": 22584693,
+                        "system_avg_boost": 2.3724577545497034,
+                        "strategy_weight": 103818362.65856998,
+                        "strategy_balance": 41624800.18952707,
+                        "strategy_boost": 2.4941468111765492
+                    },
+                    "50": {
+                        "global_weight": 143357395.21477208,
+                        "global_balance": 61483648.620465696,
+                        "start_time": 1747872000,
+                        "start_block": 22534698,
+                        "system_avg_boost": 2.331634482197167,
+                        "strategy_weight": 103785638.13169284,
+                        "strategy_balance": 41576945.5117518,
+                        "strategy_boost": 2.4962304674920777
+                    },
+                    "49": {
+                        "global_weight": 152044120.25855312,
+                        "global_balance": 61465468.55199266,
+                        "start_time": 1747267200,
+                        "start_block": 22484824,
+                        "system_avg_boost": 2.473651040826955,
+                        "strategy_weight": 115305342.11940011,
+                        "strategy_balance": 46409639.19222331,
+                        "strategy_boost": 2.484512789289717
+                    },
+                    "48": {
+                        "global_weight": 150835557.69099757,
+                        "global_balance": 61337225.70635787,
+                        "start_time": 1746662400,
+                        "start_block": 22435130,
+                        "system_avg_boost": 2.459119335020117,
+                        "strategy_weight": 114713594.66704027,
+                        "strategy_balance": 46307946.582858995,
+                        "strategy_boost": 2.4771902693155003
+                    },
+                    "47": {
+                        "global_weight": 150873785.85087886,
+                        "global_balance": 61189845.29271712,
+                        "start_time": 1746057600,
+                        "start_block": 22385294,
+                        "system_avg_boost": 2.4656670584659253,
+                        "strategy_weight": 114050076.10649261,
+                        "strategy_balance": 45874202.517577134,
+                        "strategy_boost": 2.48614841997075
+                    },
+                    "46": {
+                        "global_weight": 148437217.30772844,
+                        "global_balance": 61267312.572532065,
+                        "start_time": 1745452800,
+                        "start_block": 22335154,
+                        "system_avg_boost": 2.4227799633287197,
+                        "strategy_weight": 111092416.66481172,
+                        "strategy_balance": 45447764.35473374,
+                        "strategy_boost": 2.4443978321508033
+                    },
                     "45": {
-                        "global_weight": 146358683.0051178,
-                        "global_balance": 61213351.69448145,
+                        "global_weight": 146358551.19758284,
+                        "global_balance": 61213298.97146747,
                         "start_time": 1744848000,
                         "start_block": 22284997,
-                        "system_avg_boost": 2.390960124771479,
+                        "system_avg_boost": 2.3909600308554353,
                         "strategy_weight": 109463632.33390735,
                         "strategy_balance": 46175520.35093915,
                         "strategy_boost": 2.3705987826876975
@@ -1123,31 +609,31 @@
                 "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E/logo-128.png",
                     "symbol": "crvUSD",
-                    "price": 1
+                    "price": 0.999886
                 },
                 "0xD533a949740bb3306d119CC777fa900bA034cd52": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xD533a949740bb3306d119CC777fa900bA034cd52/logo-128.png",
                     "symbol": "CRV",
-                    "price": 0.649843
+                    "price": 0.677294
                 },
                 "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xFCc5c47bE19d06BF83eB04298b026F81069ff65b/logo-128.png",
                     "symbol": "yCRV",
-                    "price": 0.370752
+                    "price": 0.339396
                 },
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.737577648352368
+                    "price": 0.688209422122286
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.0676675966783418
+                    "price": 1.070934515882961
                 }
             }
         }
     },
-    "last_update": 1745439604,
-    "last_update_block": 22334053
+    "last_update": 1748797043,
+    "last_update_block": 22611182
 }
