@@ -14,10 +14,10 @@
             "peg_data": {
                 "peg_token": "0xD533a949740bb3306d119CC777fa900bA034cd52",
                 "swap_size": 10000.0,
-                "output_amount": 5570.265237140797,
-                "peg": 0.5570265237140797,
-                "balance_peg_token": 446626.85044693266,
-                "balance_ylocker_token": 8110408.01615115,
+                "output_amount": 5712.326006462286,
+                "peg": 0.5712326006462286,
+                "balance_peg_token": 460215.65136775817,
+                "balance_ylocker_token": 8086518.02332812,
                 "pool": "0x99f5aCc8EC2Da2BC0771c32814EFF52b712de1E5"
             },
             "strategy_data": {
@@ -26,21 +26,21 @@
                 "strategy": "0xe3974E44bc08f435da2c6DB7D01e1758496dA119",
                 "unsold_rewards": 0.0,
                 "profit_release_data": {
-                    "unlock_rate": 0.536582871717463,
-                    "unlock_date": 1750422071,
-                    "apr": 0.40382296438147164
+                    "unlock_rate": 0.37052658398634875,
+                    "unlock_date": 1750508447,
+                    "apr": 0.2786917072981609
                 },
                 "swap_min": 100.0,
                 "swap_max": 12000.0,
-                "swap_min_usd": 107.3781842049249,
-                "swap_max_usd": 12885.38210459099,
+                "swap_min_usd": 107.3603765261814,
+                "swap_max_usd": 12883.245183141767,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 2.040153321732075,
-                "price_per_share_reward_token": 1.0738720473012224,
+                "price_per_share_autocompounder": 2.040164535337279,
+                "price_per_share_reward_token": 1.073873307461987,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
-                "credit": 62423.74679765116
+                "credit": 24083.620397312297
             },
             "pipeline_data": {
                 "receiver": "0x642a16A7885d7a8b9353E2a4B68834f31389dC2c",
@@ -66,14 +66,14 @@
                     }
                 },
                 "split_ratio_admin_fees": [
-                    0.8551365023401469,
+                    0.8554686000216857,
                     0.0,
-                    0.1448634976598531
+                    0.1445313999783144
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7544402340664798,
-                    0.10254933668460885,
-                    0.1430104292489114
+                    0.7547372686232786,
+                    0.10254452927508102,
+                    0.14271820210164032
                 ]
             },
             "ybs_data": {
@@ -629,14 +629,14 @@
                         "strategy_boost": 2.49422672876565
                     },
                     "54": {
-                        "global_weight": 154042364.92159358,
-                        "global_balance": 61951808.977813885,
+                        "global_weight": 154142244.42999431,
+                        "global_balance": 62014232.724611536,
                         "start_time": 1750291200,
                         "start_block": 22734807,
-                        "system_avg_boost": 2.4864869559621585,
-                        "strategy_weight": 104361636.32839595,
-                        "strategy_balance": 41841278.95223171,
-                        "strategy_boost": 2.49422672876565
+                        "system_avg_boost": 2.485594639451534,
+                        "strategy_weight": 104461515.8367967,
+                        "strategy_balance": 41903702.69902936,
+                        "strategy_boost": 2.4928946395760008
                     }
                 },
                 "ybs": "0xE9A115b77A1057C918F997c32663FdcE24FB873f",
@@ -647,12 +647,12 @@
                 "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E/logo-128.png",
                     "symbol": "crvUSD",
-                    "price": 0.999916
+                    "price": 0.999749
                 },
                 "0xD533a949740bb3306d119CC777fa900bA034cd52": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xD533a949740bb3306d119CC777fa900bA034cd52/logo-128.png",
                     "symbol": "CRV",
-                    "price": 0.585444
+                    "price": 0.586237
                 },
                 "0xFCc5c47bE19d06BF83eB04298b026F81069ff65b": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xFCc5c47bE19d06BF83eB04298b026F81069ff65b/logo-128.png",
@@ -662,16 +662,16 @@
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.6586757408411307
+                    "price": 0.6586793612208525
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.073781842049249
+                    "price": 1.073603765261814
                 }
             }
         }
     },
-    "last_update": 1750422006,
-    "last_update_block": 22745647
+    "last_update": 1750422606,
+    "last_update_block": 22745697
 }
