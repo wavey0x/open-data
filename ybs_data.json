@@ -32,12 +32,12 @@
                 },
                 "swap_min": 100.0,
                 "swap_max": 9937.257327957508,
-                "swap_min_usd": 108.48934921765012,
-                "swap_max_usd": 10780.865805184349,
+                "swap_min_usd": 108.4893904165532,
+                "swap_max_usd": 10780.869899225365,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 2.1108183533515685,
-                "price_per_share_reward_token": 1.0849575046692768,
+                "price_per_share_autocompounder": 2.110820599018859,
+                "price_per_share_reward_token": 1.0849579166826164,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
                 "credit": 21930.493977465525
@@ -55,6 +55,10 @@
                     "0x09fD37d9AA613789c517e76DF1c53aEce2b60Df4": {
                         "balance": 749.7162887201604,
                         "symbol": "ebUSD"
+                    },
+                    "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E": {
+                        "balance": 1685.0681252952195,
+                        "symbol": "crvUSD"
                     }
                 },
                 "split_ratio_admin_fees": [
@@ -63,9 +67,9 @@
                     0.14297219019919344
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7583656930822482,
-                    0.10054574236283799,
-                    0.14108856455491378
+                    0.7583669154608363,
+                    0.10054429256937347,
+                    0.14108879196979018
                 ]
             },
             "ybs_data": {
@@ -734,16 +738,16 @@
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.843309926894312
+                    "price": 0.8433108240788164
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.0848934921765012
+                    "price": 1.084893904165532
                 }
             }
         }
     },
-    "last_update": 1755521826,
-    "last_update_block": 23168086
+    "last_update": 1755522006,
+    "last_update_block": 23168101
 }
