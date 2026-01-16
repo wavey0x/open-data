@@ -26,20 +26,20 @@
                 "strategy": "0xe3974E44bc08f435da2c6DB7D01e1758496dA119",
                 "unsold_rewards": 0.0,
                 "profit_release_data": {
-                    "unlock_rate": 0.2435206213276506,
-                    "unlock_date": 1768604891,
-                    "apr": 0.19298855616756044
+                    "unlock_rate": 0,
+                    "unlock_date": 0,
+                    "apr": 0
                 },
                 "swap_min": 100.0,
                 "swap_max": 5219.317543707513,
-                "swap_min_usd": 112.2927477454686,
-                "swap_max_usd": 5860.915083390466,
+                "swap_min_usd": 112.2927809944041,
+                "swap_max_usd": 5860.916818757989,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 2.286196705516561,
-                "price_per_share_reward_token": 1.123885750105156,
+                "price_per_share_autocompounder": 2.2861982165100296,
+                "price_per_share_reward_token": 1.1238860828782473,
                 "claimable_rewards": 0.0,
-                "harvest_trigger": false,
+                "harvest_trigger": true,
                 "credit": 5058.274929566116
             },
             "pipeline_data": {
@@ -75,9 +75,9 @@
                     0.15285589573216488
                 ],
                 "split_ratio_vote_incentives": [
-                    0.7556991935042966,
-                    0.09200209111384954,
-                    0.1522987153818539
+                    0.7557004213867453,
+                    0.09200061577193383,
+                    0.15229896284132083
                 ]
             },
             "ybs_data": {
@@ -966,12 +966,12 @@
                 "0x27B5739e22ad9033bcBf192059122d163b60349D": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x27B5739e22ad9033bcBf192059122d163b60349D/logo-128.png",
                     "symbol": "yvyCRV",
-                    "price": 0.5256615127158967
+                    "price": 0.5256618601361823
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F/logo-128.png",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.122927477454686
+                    "price": 1.122927809944041
                 }
             }
         },
@@ -1007,12 +1007,12 @@
                 },
                 "swap_min": 1.0,
                 "swap_max": 10000.0,
-                "swap_min_usd": 1.122927477454686,
-                "swap_max_usd": 11229.27477454686,
+                "swap_min_usd": 1.122927809944041,
+                "swap_max_usd": 11229.27809944041,
                 "reward_token_decimals": 18,
                 "reward_token": "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F",
-                "price_per_share_autocompounder": 1.0564141283326245,
-                "price_per_share_reward_token": 1.123885750105156,
+                "price_per_share_autocompounder": 1.0564177410253002,
+                "price_per_share_reward_token": 1.1238860828782473,
                 "claimable_rewards": 0.0,
                 "harvest_trigger": false,
                 "credit": 0.0
@@ -1104,16 +1104,16 @@
                 "0x1F6f16945e395593d8050d6Cc33e4328a515B648": {
                     "logoURI": "https://assets.smold.app/api/token/1/0x1F6f16945e395593d8050d6Cc33e4328a515B648/logo-128.png",
                     "symbol": "yvyYB",
-                    "price": 0.34570010387751915
+                    "price": 0.34570128609214484
                 },
                 "0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F": {
                     "logoURI": "https://assets.smold.app/api/token/1/0xBF319dDC2Edc1Eb6FDf9910E39b37Be221C8805F/logo-128.png",
                     "symbol": "yvcrvUSD-2",
-                    "price": 1.122927477454686
+                    "price": 1.122927809944041
                 }
             }
         }
     },
-    "last_update": 1768604790,
-    "last_update_block": 24250469
+    "last_update": 1768604971,
+    "last_update_block": 24250484
 }
