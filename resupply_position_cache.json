@@ -3500,6 +3500,14 @@
     [
       24408044,
       1770504671
+    ],
+    [
+      24408054,
+      1770504791
+    ],
+    [
+      24408059,
+      1770504851
     ]
   ],
   "historical_data": {
@@ -18293,6 +18301,40 @@
           "cvx": 0.0028386700405699556
         },
         "total_usd": 1001.6173244468313
+      },
+      {
+        "block": 24408054,
+        "timestamp": 1770504791,
+        "collateral_amount": 10691.347935239934,
+        "collateral_usd": 10691.347935239934,
+        "collateral_price": 1,
+        "borrow_amount": 9802.073993467688,
+        "borrow_usd": 9710.502245880496,
+        "borrow_price": 0.9906579212064491,
+        "net_collateral": 980.8456893594375,
+        "rewards": {
+          "rsup": 21.060261381232994,
+          "crv": 0.40854789674284175,
+          "cvx": 0.0028389439000252176
+        },
+        "total_usd": 1002.3173375813134
+      },
+      {
+        "block": 24408059,
+        "timestamp": 1770504851,
+        "collateral_amount": 10691.348739029407,
+        "collateral_usd": 10691.348739029407,
+        "collateral_price": 1,
+        "borrow_amount": 9802.073993467688,
+        "borrow_usd": 9710.188215766775,
+        "borrow_price": 0.990625884097371,
+        "net_collateral": 981.1605232626316,
+        "rewards": {
+          "rsup": 21.06077671188325,
+          "crv": 0.408567602077636,
+          "cvx": 0.0028390808305520142
+        },
+        "total_usd": 1002.632706657423
       }
     ],
     "10x (wbtc)": [
@@ -33085,6 +33127,40 @@
           "cvx": 0.0
         },
         "total_usd": 1020.6615869688092
+      },
+      {
+        "block": 24408054,
+        "timestamp": 1770504791,
+        "collateral_amount": 6313.85822281299,
+        "collateral_usd": 6313.85822281299,
+        "collateral_price": 1,
+        "borrow_amount": 5353.004368762595,
+        "borrow_usd": 5302.996180167393,
+        "borrow_price": 0.9906579212064491,
+        "net_collateral": 1010.8620426455973,
+        "rewards": {
+          "rsup": 10.108937191967621,
+          "crv": 0.0,
+          "cvx": 0.0
+        },
+        "total_usd": 1020.9709798375649
+      },
+      {
+        "block": 24408059,
+        "timestamp": 1770504851,
+        "collateral_amount": 6313.858500651481,
+        "collateral_usd": 6313.858500651481,
+        "collateral_price": 1,
+        "borrow_amount": 5353.004577612492,
+        "borrow_usd": 5302.824892274648,
+        "borrow_price": 0.990625884097371,
+        "net_collateral": 1011.0336083768334,
+        "rewards": {
+          "rsup": 10.10904022892855,
+          "crv": 0.0,
+          "cvx": 0.0
+        },
+        "total_usd": 1021.1426486057619
       }
     ],
     "4x (sdola)": [
@@ -47877,6 +47953,40 @@
           "cvx": 0.01779888056214104
         },
         "total_usd": 1003.8918135388685
+      },
+      {
+        "block": 24408054,
+        "timestamp": 1770504791,
+        "collateral_amount": 2786.2815280647933,
+        "collateral_usd": 2786.2815280647933,
+        "collateral_price": 1,
+        "borrow_amount": 1803.7322533377032,
+        "borrow_usd": 1786.8816445045534,
+        "borrow_price": 0.9906579212064491,
+        "net_collateral": 999.3998835602399,
+        "rewards": {
+          "rsup": 2.0412182969584625,
+          "crv": 2.561540934132798,
+          "cvx": 0.01779980053072196
+        },
+        "total_usd": 1004.0204425918619
+      },
+      {
+        "block": 24408059,
+        "timestamp": 1770504851,
+        "collateral_amount": 2786.281645913596,
+        "collateral_usd": 2786.281645913596,
+        "collateral_price": 1,
+        "borrow_amount": 1803.7323413044896,
+        "borrow_usd": 1786.823945279781,
+        "borrow_price": 0.990625884097371,
+        "net_collateral": 999.4577006338152,
+        "rewards": {
+          "rsup": 2.0412748398464844,
+          "crv": 2.5616069886239887,
+          "cvx": 0.01780025953442252
+        },
+        "total_usd": 1004.07838272182
       }
     ]
   },
@@ -49350,7 +49460,19 @@
       "block": 24407962,
       "pair_address": "0x2d8ecd48b58e53972dBC54d8d0414002B41Abc9D",
       "amount": 18373.835344072
+    },
+    {
+      "timestamp": 1770504671,
+      "block": 24408044,
+      "pair_address": "0x27AB448a75d548ECfF73f8b4F36fCc9496768797",
+      "amount": 116832.15000000001
+    },
+    {
+      "timestamp": 1770504791,
+      "block": 24408054,
+      "pair_address": "0x2d8ecd48b58e53972dBC54d8d0414002B41Abc9D",
+      "amount": 109099.47
     }
   ],
-  "last_redemption_block": 24407962
+  "last_redemption_block": 24408054
 }
